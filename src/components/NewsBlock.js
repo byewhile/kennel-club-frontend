@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function NewsBlock({ newsInfo }) {
+    console.log(newsInfo.image);
     return (
         <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
             <div className="relative h-100">
