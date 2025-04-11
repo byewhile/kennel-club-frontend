@@ -12,7 +12,7 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'byewhile.ru',
                 port: '',
-                pathname: 'api/images/**',
+                pathname: '/images/**',
             },
         ],
     },
