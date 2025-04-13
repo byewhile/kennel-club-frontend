@@ -14,7 +14,9 @@ export default function RootLayout({ children }) {
       <body>
         <ScrollToTop />
         <Header />
-        {children}
+        <div className="min-h-[95vh]">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>
