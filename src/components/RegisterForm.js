@@ -88,7 +88,7 @@ export default function RegisterForm() {
                         value="Отправить"
                         className="w-full bg-lim text-white bg-green font-bold py-2 px-4 rounded-lg transition duration-200 cursor-pointer"
                     />
-                    {<ErrorBlock error={error} />}
+                    {error && <ErrorBlock error={error} />}
                 </div>
             ) : (
                 <div className="flex flex-col items-center gap-6">
@@ -134,7 +134,7 @@ export default function RegisterForm() {
                         value="Зарегистрироваться" 
                         className="w-full bg-lim text-white bg-green font-bold py-2 px-4 rounded-lg transition duration-200 cursor-pointer"
                     />
-                    {<ErrorBlock error={error} />}
+                    {error && <ErrorBlock error={error} />}
                 </div>
             )}
         </form>
