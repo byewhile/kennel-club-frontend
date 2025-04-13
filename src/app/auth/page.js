@@ -1,32 +1,12 @@
 "use client"
-
-import axios from "axios";
+ 
 import LoginForm from "@/components/LoginForm";
 import RegisterForm from "@/components/RegisterForm";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-
+import { useState } from "react";
+ 
 export default function AuthPage() {
     const [loginForm, setLoginForm] = useState(true);
-    const router = useRouter();
-
-    useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
-                    withCredentials: true
-                });
-
-                if (res.data.authenticated) {
-                    router.push("/profile");
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        checkSession();
-    }, []);
-
+ 
     return (
         <div className="flex flex-col items-center justify-center h-[75vh]">
             {loginForm ? <LoginForm /> : <RegisterForm />}
