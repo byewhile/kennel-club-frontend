@@ -24,7 +24,8 @@ export default function LoginForm() {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login.php`, formData, {
                 withCredentials: true
             });
-
+            console.log(res.data);
+            
             if (res.data.authenticated) {
                 window.location.reload();
             } else {
