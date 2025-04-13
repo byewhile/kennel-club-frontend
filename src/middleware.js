@@ -2,12 +2,14 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
+  const cookie = request.cookies.get('PHPSESSID')?.value;
 
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
-      headers: {
-        "Cookie": request.cookies.toString()
-      }
+      credentials: "include",
+      headers: cookie ? {
+        "Cookie": `PHPSESSID=${cookie}`
+      } : {}
     });
 
     const data = await response.json();
