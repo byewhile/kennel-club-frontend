@@ -13,6 +13,7 @@ export async function middleware(request) {
 
     const data = await response.json();
     const isAuthenticated = data.authenticated;
+    console.log('Auth response:', data);
 
     if (isAuthenticated && pathname === "/auth") {
       return NextResponse.redirect(new URL("/profile", request.url));
