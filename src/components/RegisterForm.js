@@ -55,6 +55,8 @@ export default function RegisterForm() {
                 withCredentials: true
             });
 
+            console.log(res.data);
+
             if (res.data.authenticated) {
                 window.location.reload();
             } else {
