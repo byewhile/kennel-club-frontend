@@ -31,5 +31,6 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/profile", "/auth"]
+  matcher: ["/profile", "/auth"],
+  runtime: "nodejs",
 }
