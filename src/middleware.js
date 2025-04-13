@@ -13,6 +13,7 @@ export async function middleware(request) {
     });
 
     const data = await response.json();
+    console.log(data);
     const isAuthenticated = data.authenticated;
 
     if (isAuthenticated && pathname === "/auth") {
