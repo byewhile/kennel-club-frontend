@@ -9,7 +9,7 @@ export async function middleware(request) {
       withCredentials: "true",
     });
 
-    const data = await res.json();
+    const data = await res.data;
     const isAuthenticated = data.authenticated;
     console.log(data);
 
@@ -21,8 +21,8 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/auth", request.url));
     }
   } catch (err) {
+    console.log(err);
     if (pathname === "/profile") {
-      console.log(err);
       return NextResponse.redirect(new URL("/auth", request.url));
     }
   }
