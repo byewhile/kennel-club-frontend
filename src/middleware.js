@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import axios from "axios";
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
-      withCredentials: "true",
-    });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+      credentials: "include",
+      headers: {
+        "Cookie": request.cookies.toString()
+      }
+    })
 
     const data = await res.data;
     const isAuthenticated = data.authenticated;
@@ -31,5 +33,4 @@ export async function middleware(request) {
 
 export const config = {
   matcher: ["/profile", "/auth"],
-  runtime: "nodejs",
 }
