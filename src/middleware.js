@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
+  console.log('Cookies sent:', request.headers.get("cookie"));
+
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/api/checkSession.php`, {
       credentials: "include",
