@@ -9,7 +9,7 @@ export async function middleware(request) {
       headers: {
         "Cookie": request.cookies.toString()
       }
-    })
+    });
 
     const data = await res.json();
     const isAuthenticated = data.authenticated;
