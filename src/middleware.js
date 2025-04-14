@@ -11,7 +11,7 @@ export async function middleware(request) {
 
     const data = await res.json();
     const isAuthenticated = data.authenticated;
-    console.log('Auth response:', data);
+    console.log(data);
 
     if (isAuthenticated && pathname === "/auth") {
       return NextResponse.redirect(new URL("/profile", request.url));
@@ -22,6 +22,7 @@ export async function middleware(request) {
     }
   } catch (err) {
     if (pathname === "/profile") {
+      console.log(err);
       return NextResponse.redirect(new URL("/auth", request.url));
     }
   }
