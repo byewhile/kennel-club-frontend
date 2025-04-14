@@ -1,23 +1,33 @@
+"use client"
+
+import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
-import { redirect } from "next/navigation";
-import { cookies } from 'next/headers'
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-async function checkAuth() {
-    const res = await axios.get(`${process.env.API_BASE_URL}/api/checkSession.php`, {
-        withCredentials: true,
-        headers: { 
-            Cookie: cookies().toString() 
+export default function ProfilePage() {
+    // const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+                    withCredentials: true
+                });
+
+                if (!res.data.authenticated) {
+                    router.push("/auth");
+                } else {
+                    setIsLoading(false);
+                }
+            } catch (err) {
+                console.log(err);
+            }
         }
-    });
-    return res.data.authenticated;
-}
-
-export default async function ProfilePage() {
-    const isAuthenticated = await checkAuth();
-
-    if (!isAuthenticated) {
-        redirect("/auth");
-    }
+        checkAuth();
+    }, []);
 
     const logout = async () => {
         try {
@@ -28,6 +38,12 @@ export default async function ProfilePage() {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    if (isLoading) {
+        return (
+            <LoadingSpinner />
+        )
     }
  
     return (
