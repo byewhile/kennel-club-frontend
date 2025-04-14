@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import ErrorBlock from "./ErrorBlock";
 import { FaPaw } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
 import CaptchaBlock from "./CaptchaBlock";
 
 export default function RegisterForm() {
@@ -74,7 +75,7 @@ export default function RegisterForm() {
         <form className="min-w-sm lg:min-w-md mx-auto mt-16 p-8 text-green rounded-lg shadow-lg" onSubmit={sendEmail ? handleEmailFormSubmit : handleSubmit}>
             {sendEmail ? (
                 <div className="flex flex-col items-center gap-6">
-                    <FaPaw className="text-4xl" />
+                    <FiMail className="text-4xl" />
                     <h2 className="text-2xl font-bold">Введите код подтверждения</h2>
                     <div className="w-100 text-center">Мы отправили одноразовый код подтверждения на указанный адрес электронной почты, пожалуйста, введите его ниже</div>
 
