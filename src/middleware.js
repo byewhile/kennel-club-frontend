@@ -1,17 +1,15 @@
 import { NextResponse } from "next/server";
+import axios from "axios";
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
-      credentials: 'include',
-      headers: {
-        "Cookie": request.cookies.toString()
-      }
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+      withCredentials: "true",
     });
 
-    const data = await response.json();
+    const data = await res.json();
     const isAuthenticated = data.authenticated;
     console.log('Auth response:', data);
 
