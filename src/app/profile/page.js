@@ -1,9 +1,13 @@
 import axios from "axios";
 import { redirect } from "next/navigation";
+import { cookies } from 'next/headers'
 
 async function checkAuth() {
     const res = await axios.get(`${process.env.API_BASE_URL}/api/checkSession.php`, {
         withCredentials: true,
+        headers: { 
+            Cookie: cookies().toString() 
+        }
     });
     return res.data.authenticated;
 }
