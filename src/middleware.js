@@ -4,14 +4,14 @@ export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+    const res = await fetch(`${process.env.API_BASE_URL}/api/checkSession.php`, {
       credentials: "include",
       headers: {
-        "Cookie": request.cookies.toString()
+        "Cookie": request.headers.get("cookie") || ""
       }
     })
 
-    const data = await res.data;
+    const data = await res.json();
     console.log(data);
     const isAuthenticated = data.authenticated;
 
