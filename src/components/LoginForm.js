@@ -4,10 +4,12 @@ import axios from "axios";
 import { useState } from "react";
 import ErrorBlock from "./ErrorBlock";
 import { FaPaw } from "react-icons/fa";
+import CaptchaBlock from "./CaptchaBlock";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [captcha, setCaptcha] = useState("");
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
@@ -16,12 +18,12 @@ export default function LoginForm() {
         const formData = new FormData();
         formData.append("email", email);
         formData.append("password", password);
+        formData.append("captcha", captcha);
 
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login.php`, formData, {
                 withCredentials: true
             });
-            console.log(res.data);
             
             if (res.data.authenticated) {
                 window.location.reload();
@@ -33,6 +35,7 @@ export default function LoginForm() {
         }
         setEmail("");
         setPassword("");
+        setCaptcha("");
     }
 
     return (
@@ -58,6 +61,19 @@ export default function LoginForm() {
                     className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
                     required
                 />
+
+                <div className="flex flex-col justify-between lg:flex-row w-full gap-6">
+                     <CaptchaBlock />
+ 
+                     <input 
+                         type="text" 
+                         placeholder="Код с картинки"
+                         value={captcha} 
+                         onChange={(e) => setCaptcha(e.target.value)}
+                         className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                         required
+                     />
+                 </div>
 
                 <input 
                     type="submit" 
