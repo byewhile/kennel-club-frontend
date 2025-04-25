@@ -10,6 +10,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 export default function AuthPage() {
     const [loginForm, setLoginForm] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    const [sendEmail, setSendEmail] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export default function AuthPage() {
                 });
 
                 if (res.data.authenticated) {
-                    router.push("/profile");
+                    router.push(`/profile/${res.data.user_id}`);
                 } else {
                     setIsLoading(false);
                 }
@@ -39,11 +40,14 @@ export default function AuthPage() {
 
     return (
         <div className="flex flex-col items-center justify-center h-[75vh]">
-            {loginForm ? <LoginForm /> : <RegisterForm />}
-            <div className="flex flex-col items-center mt-3">
-                {loginForm ? "Нет аккаунта?" : "Есть аккаунт?"}
-                <button className="text-green font-bold cursor-pointer" onClick={() => setLoginForm(!loginForm)}>{loginForm ? "Зарегистрироваться" : "Войти"}</button>
-            </div>
+            {loginForm ? <LoginForm /> : <RegisterForm sendEmail={sendEmail} setSendEmail={setSendEmail} />}
+
+            {!sendEmail && (
+                <div className="flex flex-col items-center mt-3">
+                    {loginForm ? "Нет аккаунта?" : "Есть аккаунт?"}
+                    <button className="text-green font-bold cursor-pointer" onClick={() => setLoginForm(!loginForm)}>{loginForm ? "Зарегистрироваться" : "Войти"}</button>
+                </div>
+            )}
         </div>
     )
 }

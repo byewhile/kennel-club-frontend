@@ -7,14 +7,13 @@ import { FaPaw } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import CaptchaBlock from "./CaptchaBlock";
 
-export default function RegisterForm() {
+export default function RegisterForm({ sendEmail, setSendEmail }) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [captcha, setCaptcha] = useState("");
     const [code, setCode] = useState("");
-    const [sendEmail, setSendEmail] = useState(false);
     const [error, setError] = useState(null);
     
     const handleSubmit = async (e) => {
