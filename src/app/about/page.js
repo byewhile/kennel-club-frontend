@@ -1,6 +1,6 @@
 export default function AboutPage() {
     return (
-        <main className="container mx-auto px-10 py-10">
+        <main className="container mx-auto px-12 py-10">
             <h2 className="text-xl lg:text-3xl text-green font-bold mb-5">О клубе</h2>
             <p className="text-xl text-gray-600">Сегодня клуб объединяет более 500 членов и остается центром собаководства в регионе, воспитывая ответственных владельцев и помогая собакам обрести любящие семьи.<br /><em>"От маленькой инициативы – к большому делу!"</em></p>
 

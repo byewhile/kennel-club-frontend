@@ -27,7 +27,7 @@ export default function BreedsPage() {
     }, []);
 
     return (
-        <main className="container mx-auto px-10 py-10">
+        <main className="container mx-auto px-12 py-10">
             <h2 className="text-xl lg:text-3xl text-green font-bold mb-3">Породы собак нашего клуба</h2>
 
             {isLoading ? (

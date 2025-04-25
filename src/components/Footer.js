@@ -4,7 +4,7 @@ import { FaVk, FaTelegram, FaYoutube, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClo
 export default function Footer() {
   return (
     <footer className="bg-green text-white py-12">
-      <div className="container mx-auto px-10">
+      <div className="container mx-auto px-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
             <h4 className="text-lime-300 font-bold text-xl mb-4">Клуб собаководства</h4>
@@ -62,7 +62,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <h5 className="text-lime-300 font-bold text-lg mb-4">Зарегистрируйтесь</h5>
             <p className="mb-4">И будьте в курсе всех событий и акций клуба</p>
-            <Link href="/profile" className="inline-block bg-lime text-green x-6 p-3 rounded-lg font-medium">Зарегистрироваться</Link>
+            <Link href="/auth" className="inline-block bg-lime text-green x-6 p-3 rounded-lg font-medium">Зарегистрироваться</Link>
           </div>
         </div>
 

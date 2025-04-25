@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <main className="bg-green text-white pt-12">
-        <div className="container mx-auto px-10">
+        <div className="container mx-auto px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
             <div>
               <h2 className="text-3xl lg:text-5xl font-bold mb-8">
