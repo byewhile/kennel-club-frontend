@@ -1,8 +1,8 @@
 "use client"
 
-import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { FaArrowLeft } from 'react-icons/fa';
 import DetailsBlock from "@/components/DetailsBlock";
@@ -13,8 +13,13 @@ export default function OneNewsPage() {
     const [breeds, setBreeds] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const router = useRouter();
 
     const { slug } = useParams();
+
+    const handleBack = () => {
+        router.back()
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,8 +36,8 @@ export default function OneNewsPage() {
     }, []);
 
     return (
-        <main className="container mx-auto px-10 py-10">
-            <Link href="/breeds" className="text-green bg-lime rounded-lg p-3 font-medium"><FaArrowLeft className="inline mr-2" /> Все породы</Link>
+        <main className="container mx-auto px-12 py-10">
+            <button onClick={handleBack} className="text-green bg-lime rounded-lg p-3 font-medium cursor-pointer"><FaArrowLeft /></button>
 
             {isLoading ? (
                 <LoadingSpinner />
