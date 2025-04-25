@@ -3,11 +3,9 @@
 import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ProfilePage() {
-    // const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
@@ -16,11 +14,12 @@ export default function ProfilePage() {
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
                     withCredentials: true
                 });
+                const data = res.data;
 
-                if (!res.data.authenticated) {
+                if (!data.authenticated) {
                     router.push("/auth");
                 } else {
-                    setIsLoading(false);
+                    router.push(`/profile/${data.user_id}`);
                 }
             } catch (err) {
                 console.log(err);
@@ -29,26 +28,7 @@ export default function ProfilePage() {
         checkAuth();
     }, []);
 
-    const logout = async () => {
-        try {
-            await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout.php`, {
-                withCredentials: true
-            });
-            window.location.reload();
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    if (isLoading) {
-        return (
-            <LoadingSpinner />
-        )
-    }
- 
     return (
-        <div>
-            <button onClick={logout}>Выйти</button>
-        </div>
+        <LoadingSpinner />
     )
 }
