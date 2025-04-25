@@ -1,12 +1,34 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPaw, FaNewspaper, FaDog, FaInfoCircle, FaUser } from "react-icons/fa";
 import { MdForum } from "react-icons/md";
+import axios from "axios";
 
 export default function Header() {
+    const [userId, setUserId] = useState(null);
+    const [authenticated, setAuthenticated] = useState(false);
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+                    withCredentials: true
+                });
+                const data = res.data;
+
+                if (data.authenticated) {
+                    setUserId(data.user_id);
+                    setAuthenticated(true);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        checkAuth();
+    }, []);
 
     const pages = [
         {
@@ -31,7 +53,7 @@ export default function Header() {
         },
         {
             title: "Профиль",
-            link: "/profile",
+            link: `/${authenticated ? "profile/" + userId : "auth"}`,
             icon: <FaUser />,
         },
     ];
@@ -39,7 +61,7 @@ export default function Header() {
     return (
         <header>
             <nav className="bg-lime text-green shadow-lg py-6">
-                <div className="container mx-auto px-10">
+                <div className="container mx-auto px-12">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="flex items-center">
                             <FaPaw className="text-3xl mr-2" />
