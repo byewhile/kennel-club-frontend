@@ -12,13 +12,13 @@ export default function DetailsBlock({ details, about }) {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4">
             <div>
                 <Image 
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/images/${details.image}`} 
                     alt={`${details.title}`}
-                    width={700}
-                    height={700}
+                    width={600}
+                    height={600}
                     loading="lazy"
                     className="rounded-lg overflow-hidden"
                 />
