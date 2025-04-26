@@ -61,7 +61,7 @@ export default function Header() {
     return (
         <header>
             <nav className="bg-lime text-green shadow-lg py-6">
-                <div className="container mx-auto px-12">
+                <div className="container mx-auto px-6 lg:px-12">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="flex items-center">
                             <FaPaw className="text-3xl mr-2" />

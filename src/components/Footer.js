@@ -4,7 +4,7 @@ import { FaVk, FaTelegram, FaYoutube, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClo
 export default function Footer() {
   return (
     <footer className="bg-green text-white py-12">
-      <div className="container mx-auto px-12">
+      <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
             <h4 className="text-lime-300 font-bold text-xl mb-4">Клуб собаководства</h4>
