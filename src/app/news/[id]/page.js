@@ -25,7 +25,8 @@ export default function OneNewsPage() {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getNews.php?id=${id}`);
-                setNews(res.data[0]);
+                const data = res.data[0];
+                setNews(data);
             } catch (err) {
                 setError("Не удалось подключиться к серверу!");
             } finally {
@@ -36,7 +37,7 @@ export default function OneNewsPage() {
     }, []);
 
     return (
-        <main className="container mx-auto px-12 py-10">
+        <main className="container mx-auto px-6 lg:px-12 py-10">
             <button onClick={handleBack} className="text-green bg-lime rounded-lg p-3 font-medium cursor-pointer"><FaArrowLeft /></button>
 
             {isLoading ? (
@@ -44,7 +45,7 @@ export default function OneNewsPage() {
             ) : error ? (
                 <ErrorBlock error={error} />
             ) : (
-                <DetailsBlock details={news} />
+                <DetailsBlock details={news} about="news" />
             )}
         </main>
     )
