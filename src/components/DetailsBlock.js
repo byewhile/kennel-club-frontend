@@ -12,7 +12,7 @@ export default function DetailsBlock({ details, about }) {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-2">
             <div>
                 <Image 
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/images/${details.image}`} 
