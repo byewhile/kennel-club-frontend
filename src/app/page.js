@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaPaw, FaUsers, FaCalendarAlt, FaArrowRight } from "react-icons/fa";
 import NewsBlock from "@/components/NewsBlock";
+import NothingBlock from "@/components/NothingBlock";
+import ErrorBlock from "@/components/ErrorBlock";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function HomePage() {
   const [lastNews, setLastNews] = useState([]);
@@ -16,7 +19,8 @@ export default function HomePage() {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getNews.php?lastNews=true`);
-        setLastNews(res.data);
+        const data = res.data;
+        setLastNews(data);
       } catch (err) {
         setError("Не удалось подключиться к серверу!");
       } finally {
@@ -29,7 +33,7 @@ export default function HomePage() {
   return (
     <>
       <main className="bg-green text-white pt-12">
-        <div className="container mx-auto px-12">
+        <div className="container mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
             <div>
               <h2 className="text-3xl lg:text-5xl font-bold mb-8">
@@ -56,20 +60,14 @@ export default function HomePage() {
       </main>
 
       <section className="py-16">
-        <div className="container mx-auto px-10">
+        <div className="container mx-auto px-6 lg:px-12">
           <h2 className="text-3xl text-center mb-12">Последние новости клуба</h2>
               {isLoading ? (
-                <div className="flex justify-center items-center h-100">
-                  <div className="animate-spin rounded-full h-15 w-15 border-t-3 border-green" />
-                </div>
+                <LoadingSpinner />
               ) : error ? (
-                <div className="flex justify-center items-center h-100">
-                  <div className="text-red-500 text-xl font-bold">{error}</div>
-                </div>
+                <ErrorBlock error={error} />
               ) : lastNews.length === 0 ? (
-                <div className="flex justify-center items-center h-100">
-                    <div className="text-green text-xl font-bold">Новостей пока нет</div>
-                </div>
+                <NothingBlock />
               ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {lastNews.map((news, index) => (
@@ -85,7 +83,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-16 bg-gray-100">
-        <div className="container mx-auto px-10">
+        <div className="container mx-auto px-6 lg:px-12">
           <h3 className="text-3xl text-center mb-12">Почему стоит присоединиться</h3>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
