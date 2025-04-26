@@ -19,9 +19,10 @@ export default function AuthPage() {
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
                     withCredentials: true
                 });
+                const data = res.data;
 
-                if (res.data.authenticated) {
-                    router.push(`/profile/${res.data.user_id}`);
+                if (data.authenticated) {
+                    router.push(`/profile/${data.user_id}`);
                 } else {
                     setIsLoading(false);
                 }
