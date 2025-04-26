@@ -1,17 +1,25 @@
 "use client"
 
 import { Suspense, useEffect, useState } from "react";
-import { FaCrown, FaBan, FaUser } from "react-icons/fa6";
+import { FaCrown, FaBan, FaUser, FaDog, FaWeightHanging  } from "react-icons/fa6";
+import { MdHeight } from "react-icons/md";
+import { GiComb } from "react-icons/gi";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import slugify from "slugify";
 
 function AdminContent() {
     const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState([]);
     const [newBreed, setNewBreed] = useState({
         name: "",
+        age: ["", ""],
+        wool: "Не линяет",
+        height: ["", ""],
+        weight: ["", ""],
         text: "",
         image: null
     });
@@ -78,30 +86,11 @@ function AdminContent() {
         checkAuth();
     }, []);
 
-    const handleBreedSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("name", newBreed.name);
-        formData.append("description", newBreed.description);
-        formData.append("image", newBreed.image);
-
-        try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/addBreed.php`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            });
-            setNewBreed({ name: "", description: "", image: null });
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     const handleNewsSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("title", newNews.title);
-        formData.append("content", newNews.content);
+        formData.append("text", newNews.text);
         formData.append("image", newNews.image);
 
         try {
@@ -110,11 +99,38 @@ function AdminContent() {
                     "Content-Type": "multipart/form-data"
                 }
             });
-            setNewNews({ title: "", content: "", image: null });
+            setNewNews({ title: "", text: "", image: null });
         } catch (err) {
             console.log(err);
         }
-    };
+    }
+
+    const handleBreedSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", newBreed.name);
+        formData.append("age[]", newBreed.age[0]);
+        formData.append("age[]", newBreed.age[1]);
+        formData.append("wool", newBreed.wool);
+        formData.append("height[]", newBreed.height[0]);
+        formData.append("height[]", newBreed.height[1]);
+        formData.append("weight[]", newBreed.weight[0]);
+        formData.append("weight[]", newBreed.weight[1]);
+        formData.append("text", newBreed.text);
+        formData.append("image", newBreed.image);
+        formData.append("link", slugify(newBreed.name, { lower: true }));
+
+        try {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/addBreed.php`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            setNewBreed({ name: "", age: ["", ""], wool: "Не линяет", height: ["", ""], weight: ["", ""], text: "", image: null });
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const handleUserAction = async (user_id, action) => {
         const formData = new FormData();
@@ -127,104 +143,247 @@ function AdminContent() {
         } catch (err) {
             console.log(err);
         }
-    };
+    }
 
     if (isLoading) {
         return <LoadingSpinner />;
     }
 
     return (
-        <main className="container mx-auto px-12 pt-12">
-            <h2 className="text-green text-3xl font-bold mb-3">Админ панель</h2>
+        <main className="container mx-auto px-6 lg:px-12 py-10">
+            <h2 className="text-xl lg:text-3xl text-green font-bold mb-3">Админ панель</h2>
             
-            <div className="flex gap-5 mb-6">
-                <button className={`cursor-pointer text-green ${activeTab == "news" ? "font-bold" : ""}`} onClick={() => setActiveTab("news")}>
-                    Новости клуба
+            <div className="flex flex-col items-start lg:flex-row gap-3 mb-6">
+                <button className={`cursor-pointer text-green ${activeTab == "news" ? "font-bold" : "font-semibold"}`} onClick={() => setActiveTab("news")}>
+                    Форма новости
                 </button>
-                <button className={`cursor-pointer text-green ${activeTab == "breeds" ? "font-bold" : ""}`} onClick={() => setActiveTab("breeds")}>
-                    Породы собак
+                <button className={`cursor-pointer text-green ${activeTab == "breeds" ? "font-bold" : "font-semibold"}`} onClick={() => setActiveTab("breeds")}>
+                    Форма породы
                 </button>
-                <button className={`cursor-pointer text-green ${activeTab == "users" ? "font-bold" : ""}`} onClick={() => setActiveTab("users")}>
-                    Участники клуба
+                <button className={`cursor-pointer text-green ${activeTab == "users" ? "font-bold" : "font-semibold"}`} onClick={() => setActiveTab("users")}>
+                    Управление пользователями
                 </button>
             </div>
 
             {activeTab == "news" && (
                 <div>
-                    <h2 className="text-2xl font-semibold mb-4">Добавить новость</h2>
-                    <form onSubmit={handleNewsSubmit} className="mb-8">
-                        <div className="mb-4">
-                            <label className="block mb-2">Заголовок</label>
-                            <input
-                                type="text"
-                                className="w-full p-2 border rounded"
-                                value={newNews.title}
-                                onChange={(e) => setNewNews({...newNews, title: e.target.value})}
-                                required
-                            />
+                    <h3 className="text-green text-xl font-bold">Форма новости</h3>
+                    <form onSubmit={handleNewsSubmit} className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-5">
+                        {newNews.image ? (
+                            <label htmlFor="image" className="cursor-pointer">
+                                <Image
+                                    src={URL.createObjectURL(newNews.image)}
+                                    alt="Предпросмотр"
+                                    width={700}
+                                    height={700}
+                                    className="rounded-lg overflow-hidden"
+                                />
+                            </label>
+                        ) : (
+                            <label htmlFor="image" className="flex justify-center items-center h-full rounded-lg cursor-pointer font-medium hover:bg-gray-50 transition">
+                                <span className="text-green font-semibold">Выберите фото</span>
+                            </label>
+                        )}
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setNewNews({...newNews, image: e.target.files[0]})}
+                            className="hidden"
+                            id="image"
+                            required
+                        />
+                        
+                        <div>
+                            <div className="mb-3">
+                                <input
+                                    type="text"
+                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-50 transition"
+                                    value={newNews.title}
+                                    onChange={(e) => setNewNews({...newNews, title: e.target.value})}
+                                    placeholder="Заголовок новости"
+                                    required
+                                />
+                            </div>
+          
+                            <div className="text-lg text-gray-600 mb-3">
+                                <textarea
+                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-50 transition resize-none"
+                                    value={newNews.text}
+                                    onChange={(e) => setNewNews({...newNews, text: e.target.value})}
+                                    placeholder="Текст новости"
+                                    required
+                                />
+                            </div>
                         </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Содержание</label>
-                            <textarea
-                                className="w-full p-2 border rounded"
-                                rows="4"
-                                value={newNews.text}
-                                onChange={(e) => setNewNews({...newNews, text: e.target.value})}
-                                required
-                            />
+                        
+                        <div>
+                            <button type="submit" className="bg-green text-white font-semibold cursor-pointer py-3 px-6 rounded-lg">
+                                Опубликовать новость
+                            </button>
                         </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Изображение</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => setNewNews({...newNews, image: e.target.files[0]})}
-                                required
-                            />
-                        </div>
-                        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
-                            Добавить новость
-                        </button>
                     </form>
                 </div>
             )}
 
             {activeTab == "breeds" && (
                 <div>
-                    <h2 className="text-2xl font-semibold mb-4">Добавить новую породу</h2>
-                    <form onSubmit={handleBreedSubmit} className="mb-8">
-                        <div className="mb-4">
-                            <label className="block mb-2">Название породы</label>
-                            <input
-                                type="text"
-                                className="w-full p-2 border rounded"
-                                value={newBreed.name}
-                                onChange={(e) => setNewBreed({...newBreed, name: e.target.value})}
-                                required
-                            />
+                    <h3 className="text-green text-xl font-bold">Форма породы</h3>
+                    <form onSubmit={handleBreedSubmit} className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-5">
+                        {newBreed.image ? (
+                            <label htmlFor="image" className="cursor-pointer">
+                                <Image
+                                    src={URL.createObjectURL(newBreed.image)}
+                                    alt="Предпросмотр"
+                                    width={700}
+                                    height={700}
+                                    className="rounded-lg overflow-hidden"
+                                />
+                            </label>
+                        ) : (
+                            <label htmlFor="image" className="flex justify-center items-center h-full rounded-lg cursor-pointer font-medium hover:bg-gray-100 transition">
+                                <span className="text-green font-semibold">Выберите фото</span>
+                            </label>
+                        )}
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setNewBreed({...newBreed, image: e.target.files[0]})}
+                            className="hidden"
+                            id="image"
+                            required
+                        />
+                    
+                        <div>
+                            <div className="mb-3">
+                                <input
+                                    type="text"
+                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-100 transition"
+                                    value={newBreed.name}
+                                    onChange={(e) => setNewBreed({...newBreed, name: e.target.value})}
+                                    placeholder="Название породы"
+                                    required
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                                <div className="flex items-center rounded-lg shadow-md px-5 py-10 gap-5">
+                                    <div className="text-4xl text-green">
+                                        <FaDog />
+                                    </div>
+
+                                    <div className="font-semibold">
+                                        <div className="text-gray-500">Длительность жизни</div>
+                                        <div>
+                                            От <input 
+                                                    type="text" 
+                                                    name="age[]" 
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    value={newBreed.age[0]}
+                                                    onChange={(e) => setNewBreed({...newBreed, age: [e.target.value, newBreed.age[1]]})}
+                                                /> 
+                                            до <input
+                                                    type="text" 
+                                                    name="age[]" 
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    value={newBreed.age[1]}
+                                                    onChange={(e) => setNewBreed({...newBreed, age: [newBreed.age[0], e.target.value]})}
+                                                /> 
+                                            лет
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center rounded-lg shadow-md px-5 py-10 gap-5">
+                                    <div className="text-4xl text-green">
+                                        <GiComb />
+                                    </div>
+
+                                    <div className="font-semibold">
+                                        <div className="text-gray-500">Шерсть</div>
+                                        <div>
+                                            <select name="wool" className="outline-none border-b-2 focus:bg-gray-100 transition" value={newBreed.wool} onChange={(e) => setNewBreed({...newBreed, wool: e.target.value})}>
+                                                <option value="Не линяет">Не линяет</option>
+                                                <option value="Мало линяет">Мало линяет</option>
+                                                <option value="Линяет">Линяет</option>
+                                                <option value="Сильно линяет">Сильно линяет</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center rounded-lg shadow-md px-5 py-10 gap-5">
+                                    <div className="text-4xl text-green">
+                                        <MdHeight />
+                                    </div>
+
+                                    <div className="font-semibold">
+                                        <div className="text-gray-500">Рост в холке, см</div>
+                                        <div>
+                                            От <input 
+                                                    type="text" 
+                                                    name="height[]" 
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    value={newBreed.height[0]}
+                                                    onChange={(e) => setNewBreed({...newBreed, height: [e.target.value, newBreed.height[1]]})}
+                                                /> 
+                                            до <input 
+                                                    type="text" 
+                                                    name="height[]" 
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    value={newBreed.height[1]}
+                                                    onChange={(e) => setNewBreed({...newBreed, height: [newBreed.height[0], e.target.value]})}
+                                                /> 
+                                            см
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center rounded-lg shadow-md px-5 py-10 gap-5">
+                                    <div className="text-4xl text-green">
+                                        <FaWeightHanging />
+                                    </div>
+
+                                    <div className="font-semibold">
+                                        <div className="text-gray-500">Вес, кг</div>
+                                        <div>
+                                            От <input 
+                                                    type="text" 
+                                                    name="weight[]"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    value={newBreed.weight[0]}
+                                                    onChange={(e) => setNewBreed({...newBreed, weight: [e.target.value, newBreed.weight[1]]})}
+                                                /> 
+                                            до <input 
+                                                    type="text" 
+                                                    name="weight[]" 
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    value={newBreed.weight[1]}
+                                                    onChange={(e) => setNewBreed({...newBreed, weight: [newBreed.weight[0], e.target.value]})}
+                                                /> 
+                                            кг
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+      
+                            <div className="text-lg text-gray-600 my-3">
+                                <textarea
+                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-100 transition resize-none"
+                                    value={newBreed.text}
+                                    onChange={(e) => setNewBreed({...newBreed, text: e.target.value})}
+                                    placeholder="Описание породы"
+                                    required
+                                />
+                            </div>
                         </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Описание</label>
-                            <textarea
-                                className="w-full p-2 border rounded"
-                                rows="4"
-                                value={newBreed.text}
-                                onChange={(e) => setNewBreed({...newBreed, text: e.target.value})}
-                                required
-                            />
+                    
+                        <div>
+                            <button type="submit" className="bg-green text-white font-semibold cursor-pointer py-3 px-6 rounded-lg">
+                                Добавить породу
+                            </button>
                         </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Изображение</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => setNewBreed({...newBreed, image: e.target.files[0]})}
-                                required
-                            />
-                        </div>
-                        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
-                            Добавить породу
-                        </button>
                     </form>
                 </div>
             )}
