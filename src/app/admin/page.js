@@ -180,7 +180,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center rounded-lg cursor-pointer font-medium hover:bg-gray-50 transition">
+                            <label htmlFor="image" className="flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -198,7 +198,7 @@ function AdminContent() {
                             <div className="mb-3">
                                 <input
                                     type="text"
-                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-50 transition"
+                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-100 transition"
                                     value={newNews.title}
                                     onChange={(e) => setNewNews({...newNews, title: e.target.value})}
                                     placeholder="Заголовок новости"
@@ -208,7 +208,7 @@ function AdminContent() {
           
                             <div className="text-lg text-gray-600 mb-3">
                                 <textarea
-                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-50 transition resize-none"
+                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-100 transition resize-none"
                                     value={newNews.text}
                                     onChange={(e) => setNewNews({...newNews, text: e.target.value})}
                                     placeholder="Текст новости"
@@ -241,7 +241,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center rounded-lg cursor-pointer font-medium hover:bg-gray-100 transition">
+                            <label htmlFor="image" className="flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -412,7 +412,7 @@ function AdminContent() {
                                 
                                 <div className="flex-2 w-full lg:w-auto">
                                     <div className="text-gray-500">Email</div>
-                                    <div>{user.email}</div>
+                                    <div className="text-green"><a href={`mailto:${user.email}`}>{user.email}</a></div>
                                 </div>
 
                                 <div className="flex-2 w-full lg:w-auto">
