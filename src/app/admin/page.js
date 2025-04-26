@@ -180,7 +180,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center h-full rounded-lg cursor-pointer font-medium hover:bg-gray-50 transition">
+                            <label htmlFor="image" className="flex justify-center items-center h-[600px] w-[600px] rounded-lg cursor-pointer font-medium hover:bg-gray-50 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -241,7 +241,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center h-full rounded-lg cursor-pointer font-medium hover:bg-gray-100 transition">
+                            <label htmlFor="image" className="flex justify-center items-center h-[600px] w-[600px] rounded-lg cursor-pointer font-medium hover:bg-gray-100 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -282,6 +282,7 @@ function AdminContent() {
                                                     className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
                                                     value={newBreed.age[0]}
                                                     onChange={(e) => setNewBreed({...newBreed, age: [e.target.value, newBreed.age[1]]})}
+                                                    required
                                                 /> 
                                             до <input
                                                     type="text" 
@@ -289,6 +290,7 @@ function AdminContent() {
                                                     className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
                                                     value={newBreed.age[1]}
                                                     onChange={(e) => setNewBreed({...newBreed, age: [newBreed.age[0], e.target.value]})}
+                                                    required
                                                 /> 
                                             лет
                                         </div>
@@ -327,6 +329,7 @@ function AdminContent() {
                                                     className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
                                                     value={newBreed.height[0]}
                                                     onChange={(e) => setNewBreed({...newBreed, height: [e.target.value, newBreed.height[1]]})}
+                                                    required
                                                 /> 
                                             до <input 
                                                     type="text" 
@@ -334,6 +337,7 @@ function AdminContent() {
                                                     className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
                                                     value={newBreed.height[1]}
                                                     onChange={(e) => setNewBreed({...newBreed, height: [newBreed.height[0], e.target.value]})}
+                                                    required
                                                 /> 
                                             см
                                         </div>
@@ -354,6 +358,7 @@ function AdminContent() {
                                                     className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
                                                     value={newBreed.weight[0]}
                                                     onChange={(e) => setNewBreed({...newBreed, weight: [e.target.value, newBreed.weight[1]]})}
+                                                    required
                                                 /> 
                                             до <input 
                                                     type="text" 
@@ -361,6 +366,7 @@ function AdminContent() {
                                                     className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
                                                     value={newBreed.weight[1]}
                                                     onChange={(e) => setNewBreed({...newBreed, weight: [newBreed.weight[0], e.target.value]})}
+                                                    required
                                                 /> 
                                             кг
                                         </div>
@@ -370,7 +376,7 @@ function AdminContent() {
       
                             <div className="text-lg text-gray-600 my-3">
                                 <textarea
-                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-100 transition resize-none"
+                                    className="w-full p-3 rounded-lg h-64 outline-none focus:bg-gray-100 transition resize-none"
                                     value={newBreed.text}
                                     onChange={(e) => setNewBreed({...newBreed, text: e.target.value})}
                                     placeholder="Описание породы"
