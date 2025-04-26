@@ -1,52 +1,52 @@
 "use client"
 
-import { useEffect, useState, Suspense } from "react"
-import { useSearchParams, useRouter, usePathname } from "next/navigation"
-import axios from "axios"
-import NewsBlock from "@/components/NewsBlock"
-import LoadingSpinner from "@/components/LoadingSpinner"
-import ErrorBlock from "@/components/ErrorBlock"
-import NothingBlock from "@/components/NothingBlock"
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import axios from "axios";
+import NewsBlock from "@/components/NewsBlock";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorBlock from "@/components/ErrorBlock";
+import NothingBlock from "@/components/NothingBlock";
 
 function NewsContent() {
-    const [news, setNews] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState(null)
+    const [news, setNews] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     
-    const searchParams = useSearchParams()
-    const router = useRouter()
-    const pathname = usePathname()
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
 
-    const currentPage = Number(searchParams.get("page")) || 1
-    const newsPerPage = 3
-    const numOfPages = Array.from({ length: Math.ceil(news.length / newsPerPage) })
+    const currentPage = Number(searchParams.get("page")) || 1;
+    const newsPerPage = 3;
+    const numOfPages = Array.from({ length: Math.ceil(news.length / newsPerPage) });
 
-    const indexOfLastNews = currentPage * newsPerPage
-    const indexOfFirstNews = indexOfLastNews - newsPerPage
-    const currentNews = news.slice(indexOfFirstNews, indexOfLastNews)
+    const indexOfLastNews = currentPage * newsPerPage;
+    const indexOfFirstNews = indexOfLastNews - newsPerPage;
+    const currentNews = news.slice(indexOfFirstNews, indexOfLastNews);
 
     const setPage = (newPage) => {
-        const params = new URLSearchParams(searchParams)
-        params.set("page", newPage)
-        router.push(`${pathname}?${params}`)
+        const params = new URLSearchParams(searchParams);
+        params.set("page", newPage);
+        router.push(`${pathname}?${params}`);
     }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getNews.php`)
-                setNews(res.data)
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getNews.php`);
+                setNews(res.data);
             } catch (err) {
-                setError("Не удалось подключиться к серверу!")
+                setError("Не удалось подключиться к серверу!");
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
         }
-        fetchData()
-    }, [])
+        fetchData();
+    }, []);
 
     return (
-        <main className="container mx-auto px-12 py-10">
+        <main className="container mx-auto px-6 lg:px-12 py-10">
             <h2 className="text-xl lg:text-3xl text-green font-bold mb-3">Новости клуба</h2>
             {isLoading ? (
                 <LoadingSpinner />
