@@ -26,10 +26,7 @@ export default function OneNewsPage() {
             try {
                 const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getBreeds.php?link=${slug}`);
                 const data = res.data[0];
-
-                if (data != null) {
-                   setBreeds({...data, description: JSON.parse(data.description)}); 
-                }
+                setBreeds(data);
             } catch (err) {
                 setError("Не удалось подключиться к серверу!");
             } finally {
