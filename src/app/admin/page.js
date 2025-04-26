@@ -174,8 +174,8 @@ function AdminContent() {
                                 <Image
                                     src={URL.createObjectURL(newNews.image)}
                                     alt="Предпросмотр"
-                                    width={700}
-                                    height={700}
+                                    width={600}
+                                    height={600}
                                     className="rounded-lg overflow-hidden"
                                 />
                             </label>
@@ -235,8 +235,8 @@ function AdminContent() {
                                 <Image
                                     src={URL.createObjectURL(newBreed.image)}
                                     alt="Предпросмотр"
-                                    width={700}
-                                    height={700}
+                                    width={600}
+                                    height={600}
                                     className="rounded-lg overflow-hidden"
                                 />
                             </label>
