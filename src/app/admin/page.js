@@ -180,7 +180,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center h-[600px] w-[600px] rounded-lg cursor-pointer font-medium hover:bg-gray-50 transition">
+                            <label htmlFor="image" className="flex justify-center items-center rounded-lg cursor-pointer font-medium hover:bg-gray-50 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -241,7 +241,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center h-[600px] w-[600px] rounded-lg cursor-pointer font-medium hover:bg-gray-100 transition">
+                            <label htmlFor="image" className="flex justify-center items-center rounded-lg cursor-pointer font-medium hover:bg-gray-100 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
