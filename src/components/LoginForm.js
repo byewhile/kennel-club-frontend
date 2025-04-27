@@ -32,7 +32,6 @@ export default function LoginForm() {
         }
         setEmail("");
         setPassword("");
-        setCaptcha("");
     }
 
     return (
