@@ -176,7 +176,7 @@ function AdminContent() {
             {activeTab == "news" && (
                 <div>
                     <h3 className="text-green text-xl font-bold">Форма новости</h3>
-                    <form onSubmit={handleNewsSubmit} className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-5">
+                    <form onSubmit={handleNewsSubmit} className="flex flex-col lg:flex-row mt-4 gap-5">
                         {newNews.image ? (
                             <label htmlFor="image" className="cursor-pointer">
                                 <Image
@@ -188,7 +188,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
+                            <label htmlFor="image" className="lg:w-[600px] lg:h-[600px] flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -202,7 +202,7 @@ function AdminContent() {
                             required
                         />
                         
-                        <div>
+                        <div className="lg:w-1/2">
                             <div className="mb-3">
                                 <input
                                     type="text"
@@ -223,12 +223,12 @@ function AdminContent() {
                                     required
                                 />
                             </div>
-                        </div>
-                        
-                        <div>
-                            <button type="submit" className="bg-green text-white font-semibold cursor-pointer py-3 px-6 rounded-lg">
-                                Опубликовать новость
-                            </button>
+
+                            <div className="flex justify-end">
+                                <button type="submit" className="bg-green text-white font-semibold cursor-pointer py-3 px-6 rounded-lg">
+                                    Опубликовать новость
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -237,7 +237,7 @@ function AdminContent() {
             {activeTab == "breeds" && (
                 <div>
                     <h3 className="text-green text-xl font-bold">Форма породы</h3>
-                    <form onSubmit={handleBreedSubmit} className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-5">
+                    <form onSubmit={handleBreedSubmit} className="flex flex-col lg:flex-row mt-4 gap-5">
                         {newBreed.image ? (
                             <label htmlFor="image" className="cursor-pointer">
                                 <Image
@@ -249,7 +249,7 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
+                            <label htmlFor="image" className="lg:w-[600px] lg:h-[600px] flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
                                 <span className="text-green font-semibold">Выберите фото</span>
                             </label>
                         )}
@@ -263,7 +263,7 @@ function AdminContent() {
                             required
                         />
                     
-                        <div>
+                        <div className="lg:w-1/2">
                             <div className="mb-3">
                                 <input
                                     type="text"
@@ -275,7 +275,7 @@ function AdminContent() {
                                 />
                             </div>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            <div className="xl:grid grid-cols-1 lg:grid-cols-2 gap-5">
                                 <div className="flex items-center rounded-lg shadow-md px-5 py-10 gap-5">
                                     <div className="text-4xl text-green">
                                         <FaDog />
@@ -391,12 +391,12 @@ function AdminContent() {
                                     required
                                 />
                             </div>
-                        </div>
-                    
-                        <div>
-                            <button type="submit" className="bg-green text-white font-semibold cursor-pointer py-3 px-6 rounded-lg">
-                                Добавить породу
-                            </button>
+
+                            <div className="flex justify-end">
+                                <button type="submit" className="bg-green text-white font-semibold cursor-pointer py-3 px-6 rounded-lg">
+                                    Добавить породу
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>

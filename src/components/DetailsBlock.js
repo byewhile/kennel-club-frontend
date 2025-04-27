@@ -12,7 +12,7 @@ export default function DetailsBlock({ details, about }) {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 gap-5">
+        <div className="flex flex-col lg:flex-row mt-4 gap-5">
             <div>
                 <Image 
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/images/${details.image}`} 
@@ -24,7 +24,7 @@ export default function DetailsBlock({ details, about }) {
                 />
             </div>
         
-            <div>
+            <div className="lg:w-1/2">
                 <div className="flex items-end justify-between mb-3">
                     <h2 className="text-green font-bold text-xl lg:text-3xl">{details.title}</h2>
                     {about == "news" && (
@@ -39,7 +39,7 @@ export default function DetailsBlock({ details, about }) {
                 ) : (
                     <div>
                         <div>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            <div className="xl:grid grid-cols-1 lg:grid-cols-2 gap-5">
                                 <div className="flex items-center rounded-lg shadow-md px-5 py-10 gap-5">
                                     <div className="text-4xl text-green">
                                         <FaDog />
