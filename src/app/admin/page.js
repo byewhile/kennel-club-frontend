@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { FaCrown, FaBan, FaUser, FaDog, FaWeightHanging  } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 import { MdHeight } from "react-icons/md";
 import { GiComb } from "react-icons/gi";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -14,6 +15,8 @@ import slugify from "slugify";
 function AdminContent() {
     const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [newBreed, setNewBreed] = useState({
         name: "",
         age: ["", ""],
@@ -42,11 +45,16 @@ function AdminContent() {
     const fetchUsers = async () => {
         try {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getUsers.php`);
-            setUsers(res.data);
+            const data = res.data;
+            setUsers(data);
         } catch (err) {
             console.log(err);
         }
     }
+
+    useEffect(() => {
+        searchTerm ? setFilteredUsers(users.filter(user => user.id.startsWith(searchTerm))) : setFilteredUsers(users);
+    }, [users, searchTerm]);
 
     const checkAdmin = async (user_id) => {
         try {
@@ -396,9 +404,25 @@ function AdminContent() {
 
             {activeTab == "users" && (
                 <div>
-                    <h3 className="text-green text-xl font-bold">Участники клуба</h3>
+                    <div className="lg:flex justify-between text-green">
+                        <h3 className="text-xl font-bold">Участники клуба</h3>
+
+                        <div className="flex items-center p-2 border border-green rounded-lg gap-2 my-2 lg:my-0">
+                            <FaSearch />
+                            <input
+                                type="text"
+                                name="search"
+                                placeholder="ID пользователя"
+                                className="font-medium outline-none placeholder-green w-full lg:w-64"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                        
+                    </div>
+                    
                     <div className="space-y-3 my-3">
-                        {users.map(user => (
+                        {filteredUsers.map(user => (
                             <div key={user.id} className="flex flex-col lg:flex-row items-center justify-between gap-5 shadow rounded p-5">
                                 <div className="flex-1 w-full lg:w-auto">
                                     <div className="text-gray-500">ID</div>
