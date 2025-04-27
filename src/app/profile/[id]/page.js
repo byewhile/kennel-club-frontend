@@ -21,11 +21,12 @@ export default function ProfilePage() {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getUserInfo.php?id=${userId}`, {
                 withCredentials: true
             });
+            const data = res.data;
 
-            if (res.data == null) {
+            if (data == null) {
                 router.push("/profile");
             } else {
-                setUserData(res.data[0]);
+                setUserData(data[0]);
                 setIsLoading(false);
             }
         } catch (err) {
@@ -82,7 +83,9 @@ export default function ProfilePage() {
                 </div>
 
                 {isOwnProfile && (
-                    <button className="py-2 px-8 rounded-2xl cursor-pointer border-2 border-green hover:bg-green hover:text-white transition" onClick={logout}>Выйти</button>
+                    <button className="p-2 px-4 rounded-2xl cursor-pointer border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition" onClick={logout}>
+                        Выйти
+                    </button>
                 )}
             </div>
 
