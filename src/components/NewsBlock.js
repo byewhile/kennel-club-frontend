@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function NewsBlock({ newsInfo }) {
     let description = newsInfo.description;
     description = description.split(".");
-    description = description[0];
+    description = description[0] + ".";
 
     return (
         <Link href={`/news/${newsInfo.id}`} className="rounded-lg overflow-hidden shadow-md h-[600px]">
@@ -23,7 +23,7 @@ export default function NewsBlock({ newsInfo }) {
                     <h3 className="text-green font-bold text-xl">{newsInfo.title}</h3>
                     <span className="text-gray-400 font-medium">{newsInfo.date.split("-").reverse().join(".")}</span>
                 </div>
-                <p>{description}...</p>
+                <p>{description}</p>
             </div>
         </Link>
     )
