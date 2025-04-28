@@ -33,7 +33,7 @@ export default function DetailsBlock({ details, about }) {
                 </div>
                 
                 {about == "news" ? (
-                    <div className="text-lg text-gray-600 my-3">
+                    <div className="text-lg text-gray-600 my-3 whitespace-pre-line">
                         <p>{details.description}</p>
                     </div>
                 ) : (
@@ -48,7 +48,7 @@ export default function DetailsBlock({ details, about }) {
                                     <div className="font-semibold">
                                         <div className="text-gray-500">Длительность жизни</div>
                                         <div>
-                                            От <span>{details.description.age.from}</span> до <span>{details.description.age.to}</span> лет
+                                            От <span>{details.description_blocks.age.from}</span> до <span>{details.description_blocks.age.to}</span> лет
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@ export default function DetailsBlock({ details, about }) {
 
                                     <div className="font-semibold">
                                         <div className="text-gray-500">Шерсть</div>
-                                        <div>{details.description.wool}</div>
+                                        <div>{details.description_blocks.wool}</div>
                                     </div>
                                 </div>
 
@@ -72,7 +72,7 @@ export default function DetailsBlock({ details, about }) {
                                     <div className="font-semibold">
                                         <div className="text-gray-500">Рост в холке, см</div>
                                         <div>
-                                            От <span>{details.description.height.from}</span> до <span>{details.description.height.to}</span> см
+                                            От <span>{details.description_blocks.height.from}</span> до <span>{details.description_blocks.height.to}</span> см
                                         </div>
                                     </div>
                                 </div>
@@ -85,15 +85,15 @@ export default function DetailsBlock({ details, about }) {
                                     <div className="font-semibold">
                                         <div className="text-gray-500">Вес, кг</div>
                                         <div>
-                                            От <span>{details.description.weight.from}</span> до <span>{details.description.weight.to}</span> кг
+                                            От <span>{details.description_blocks.weight.from}</span> до <span>{details.description_blocks.weight.to}</span> кг
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="text-lg text-gray-600 my-3">
-                            <p>{details.description.text}</p>
+                        <div className="text-lg text-gray-600 my-3 whitespace-pre-line">
+                            <p>{details.description_text}</p>
                         </div>
                     </div>
                 )}
