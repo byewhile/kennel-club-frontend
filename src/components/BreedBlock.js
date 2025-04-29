@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function BreedBlock({ breedInfo }) {
     return (
         <Link href={`/breeds/${breedInfo.link}`} className="rounded-lg overflow-hidden shadow-md h-[300px] relative">
-            <div className="relative h-100">
+            <div className="relative h-full">
                 <Image 
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/images/${breedInfo.image}`} 
                     alt={breedInfo.title}
