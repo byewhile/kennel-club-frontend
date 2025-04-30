@@ -40,7 +40,7 @@ export default function AuthPage() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center h-[75vh]">
+        <div className="flex flex-col items-center justify-center h-[75vh] pt-8">
             {loginForm ? <LoginForm /> : <RegisterForm sendEmail={sendEmail} setSendEmail={setSendEmail} />}
 
             {!sendEmail && (
