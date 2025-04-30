@@ -4,9 +4,9 @@ import Link from "next/link";
 export default function DogBlock({ dog, isOwnProfile, deleteDog }) {
     const dogAge = calculateAge(dog.birthday);
 
-    function calculateAge(birthDate) {
+    function calculateAge(birthday) {
         const today = new Date();
-        const birth = new Date(birthDate);
+        const birth = new Date(birthday);
         
         let age = today.getFullYear() - birth.getFullYear();
         const monthDiff = today.getMonth() - birth.getMonth();
@@ -41,7 +41,7 @@ export default function DogBlock({ dog, isOwnProfile, deleteDog }) {
                 <div className="text-gray-300">Дата рождения:</div>
                 <div className="text-green font-semibold">
                     {dog.birthday.split("-").reverse().join(".")}
-                    <span> ({`${dogAge}`} {dogAge > 5 || dogAge == 0 ? "лет" : dogAge == 1 ? "год" : "года" })</span>
+                    <span> ({`${dogAge}`} {dogAge > 4 || dogAge == 0 ? "лет" : dogAge == 1 ? "год" : "года" })</span>
                 </div>
             </div>
         
