@@ -418,7 +418,6 @@ function AdminContent() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
-                        
                     </div>
                     
                     <div className="space-y-3 my-3">
