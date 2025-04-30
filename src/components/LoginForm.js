@@ -2,12 +2,14 @@
 
 import axios from "axios";
 import { useState } from "react";
-import ErrorBlock from "./ErrorBlock";
 import { FaPaw } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import ErrorBlock from "./ErrorBlock";
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
@@ -21,11 +23,12 @@ export default function LoginForm() {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/login.php`, formData, {
                 withCredentials: true
             });
+            const data = res.data;
             
-            if (res.data.authenticated) {
+            if (data.authenticated) {
                 window.location.reload();
             } else {
-                setError(res.data.message);
+                setError(data.message);
             }
         } catch (err) {
             setError(err);
@@ -49,14 +52,21 @@ export default function LoginForm() {
                     required
                 />
       
-                <input 
-                    type="password"
-                    placeholder="Пароль" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
-                    required
-                />
+                <div className="flex items-center w-full font-medium px-4 py-2 border border-green rounded-lg">
+                    <input 
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Пароль" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full outline-none placeholder-green"
+                    />
+                
+                    {showPassword ? (
+                        <FaEyeSlash className="text-xl cursor-pointer" onClick={() => setShowPassword(!showPassword)} />
+                    ) : (
+                        <FaEye className="text-xl cursor-pointer" onClick={() => setShowPassword(!showPassword)} />
+                    )}
+                </div>
 
                 <input 
                     type="submit" 
