@@ -4,6 +4,7 @@ import DogBlock from "@/components/DogBlock";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
@@ -11,6 +12,7 @@ import { FaUser } from "react-icons/fa";
 export default function ProfilePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isOwnProfile, setIsOwnProfile] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [userData, setUserData] = useState(null);
     const [userDogs, setUserDogs] = useState([]);
     const [breeds, setBreeds] = useState([]);
@@ -32,14 +34,27 @@ export default function ProfilePage() {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getUserInfo.php?id=${userId}`, {
                 withCredentials: true
             });
-            const data = res.data[0];
+            const data = res.data;
 
             if (data == null) {
                 router.push("/profile");
             } else {
-                setUserData(data);
+                setUserData(data[0]);
+                checkAdmin(user_id);
                 getUserDogs();
             }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const checkAdmin = async (user_id) => {
+        try {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkAdmin.php?id=${user_id}`, {
+                withCredentials: true
+            });
+            const isAdmin = res.data;
+            setIsAdmin(isAdmin);
         } catch (err) {
             console.log(err);
         }
@@ -155,9 +170,17 @@ export default function ProfilePage() {
                 </div>
 
                 {isOwnProfile && (
-                    <button className="w-24 h-12 rounded-2xl cursor-pointer border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition" onClick={logout}>
-                        Выйти
-                    </button>
+                    <div>
+                        {isAdmin && (
+                            <Link href="/admin" className="inline-block mr-2 py-2 px-4 rounded-2xl cursor-pointer border-2 border-green text-green hover:bg-green hover:text-white transition" >
+                                Админ-панель
+                            </Link>
+                        )}
+                        
+                        <button className="py-2 px-4 rounded-2xl cursor-pointer border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition" onClick={logout}>
+                            Выйти
+                        </button>
+                    </div>
                 )}
             </div>
 
