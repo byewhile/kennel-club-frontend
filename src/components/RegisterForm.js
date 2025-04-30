@@ -111,6 +111,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                             value={firstName} 
                             onChange={(e) => setFirstName(e.target.value)}
                             className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                            required
                         />
                 
                         <input 
@@ -119,6 +120,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                             value={lastName} 
                             onChange={(e) => setLastName(e.target.value)} 
                             className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                            required
                         />
                     </div>
 
@@ -128,6 +130,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                        required
                     />
 
                     <div className="flex items-center w-full font-medium px-4 py-2 border border-green rounded-lg">
@@ -137,6 +140,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full outline-none placeholder-green"
+                            required
                         />
 
                         {showPassword ? (
@@ -145,27 +149,27 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                             <FaEye className="text-xl cursor-pointer" onClick={() => setShowPassword(!showPassword)} />
                         )}
                     </div>
-              
+            
                     <div className="flex flex-col justify-between lg:flex-row w-full gap-6">
-                     <CaptchaBlock />
- 
-                     <input 
-                         type="text" 
-                         placeholder="Код с картинки"
-                         value={captcha} 
-                         onChange={(e) => setCaptcha(e.target.value)}
-                         className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
-                         required
-                     />
-                 </div>
+                        <CaptchaBlock />
 
-                    <input 
-                        type="submit" 
-                        value="Зарегистрироваться" 
-                        className="w-full bg-lim text-white bg-green font-bold py-2 px-4 rounded-lg transition duration-200 cursor-pointer"
-                    />
-                    {error && <ErrorBlock error={error} />}
+                        <input 
+                            type="text" 
+                            placeholder="Код с картинки"
+                            value={captcha} 
+                            onChange={(e) => setCaptcha(e.target.value)}
+                            className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                            required
+                        />
                 </div>
+
+                <input 
+                    type="submit" 
+                    value="Зарегистрироваться" 
+                    className="w-full bg-lim text-white bg-green font-bold py-2 px-4 rounded-lg transition duration-200 cursor-pointer"
+                />
+                {error && <ErrorBlock error={error} />}
+            </div>
             )}
         </form>
     );
