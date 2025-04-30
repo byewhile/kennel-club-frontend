@@ -216,7 +216,7 @@ export default function ProfilePage() {
                             <div className="text-gray-300">Кличка:</div>
                             <input 
                                 type="text"
-                                className="text-green border-green border-b-1 outline-none font-semibold"
+                                className="text-green border-green border-b-1 outline-none font-semibold focus:bg-gray-50 transition"
                                 value={newDog.name}
                                 onChange={(e) => setNewDog({...newDog, name: e.target.value})}
                                 required
@@ -225,7 +225,7 @@ export default function ProfilePage() {
 
                         <div>
                             <div className="text-gray-300">Пол:</div>
-                            <select name="gender" className="text-green border-b-1 outline-none font-semibold" value={newDog.gender} onChange={(e) => setNewDog({...newDog, gender: e.target.value})} required>
+                            <select name="gender" className="text-green border-b-1 outline-none font-semibold focus:bg-gray-50 transition" value={newDog.gender} onChange={(e) => setNewDog({...newDog, gender: e.target.value})} required>
                                 <option value="">---</option>
                                 <option value="male">Мужской</option>
                                 <option value="female">Женский</option>
@@ -236,7 +236,7 @@ export default function ProfilePage() {
                             <div className="text-gray-300">Дата рождения:</div>
                             <input 
                                 type="date"
-                                className="text-green border-b-1 outline-none font-semibold"
+                                className="text-green border-b-1 outline-none font-semibold focus:bg-gray-50 transition"
                                 value={newDog.birthday}
                                 onChange={(e) => setNewDog({...newDog, birthday: e.target.value})}
                                 max={new Date().toISOString().split('T')[0]}
@@ -246,7 +246,7 @@ export default function ProfilePage() {
 
                         <div>
                             <div className="text-gray-300">Порода:</div>
-                            <select name="breed" className="text-green border-b-1 outline-none font-semibold" value={newDog.breed} onChange={(e) => setNewDog({...newDog, breed_id: e.target.value})} required>
+                            <select name="breed" className="text-green border-b-1 outline-none font-semibold focus:bg-gray-50 transition" value={newDog.breed} onChange={(e) => setNewDog({...newDog, breed_id: e.target.value})} required>
                                 <option value="">---</option>
                                 {breeds.map((breed) => (
                                     <option key={breed.id} value={breed.id}>{breed.title}</option>
