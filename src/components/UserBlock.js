@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaCrown, FaBan, FaUser  } from "react-icons/fa6";
+import { FaUser, FaCrown, FaTrash  } from "react-icons/fa6";
 
 export default function UserBlock({ user, handleUserAction }) {
     return (
@@ -16,7 +16,7 @@ export default function UserBlock({ user, handleUserAction }) {
                                 
             <div className="flex-2 w-full lg:w-auto">
                 <div className="text-gray-500">Email</div>
-                <div className="text-green"><a href={`mailto:${user.email}`}>{user.email}</a></div>
+                <div className="text-green underline"><a href={`mailto:${user.email}`}>{user.email}</a></div>
             </div>
 
             <div className="flex-2 w-full lg:w-auto">
@@ -37,7 +37,7 @@ export default function UserBlock({ user, handleUserAction }) {
                             </button>
 
                             <button onClick={() => handleUserAction(user.id, "delete")} className="bg-red-500 text-white p-2 rounded cursor-pointer transition" title="Удалить пользователя">
-                                <FaBan />
+                                <FaTrash />
                             </button>
                         </>
                     )}
