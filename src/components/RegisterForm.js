@@ -44,10 +44,6 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
         } catch (err) {
             setError(err);
         }
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPassword("");
         setCaptcha("");
     }
 

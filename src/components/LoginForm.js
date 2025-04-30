@@ -33,8 +33,6 @@ export default function LoginForm() {
         } catch (err) {
             setError(err);
         }
-        setEmail("");
-        setPassword("");
     }
 
     return (
