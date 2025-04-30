@@ -111,7 +111,7 @@ export default function ProfilePage() {
             await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout.php`, {
                 withCredentials: true
             });
-            router.push("/auth");
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
@@ -163,7 +163,7 @@ export default function ProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8 my-5">
                 {isOwnProfile && (
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+                    <form onSubmit={handleSubmit} className="space-y-2">
                         {newDog.image ? (
                             <label htmlFor="image" className="cursor-pointer">
                                 <Image

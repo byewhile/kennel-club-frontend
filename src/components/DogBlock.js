@@ -18,7 +18,7 @@ export default function DogBlock({ dog, isOwnProfile, deleteDog }) {
     }
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="space-y-2">
             <Image
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/images/${dog.image}`}
                 alt={`${dog.breed}`}
