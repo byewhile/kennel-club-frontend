@@ -59,6 +59,7 @@ export default function LoginForm() {
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full outline-none placeholder-green"
+                        required
                     />
                 
                     {showPassword ? (
