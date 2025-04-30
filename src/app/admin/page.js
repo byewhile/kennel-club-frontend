@@ -188,8 +188,8 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="lg:w-[600px] lg:h-[600px] flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
-                                <span className="text-green font-semibold">Выберите фото</span>
+                            <label htmlFor="image" className="lg:w-[600px] lg:h-[600px] flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium  transition border-2 border-dashed hover:bg-gray-50 border-gray-300">
+                                <span className="text-gray-300 font-semibold text-center">Выберите фото<br />(600x600)</span>
                             </label>
                         )}
 
@@ -206,7 +206,7 @@ function AdminContent() {
                             <div className="mb-3">
                                 <input
                                     type="text"
-                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-100 transition"
+                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-50 transition"
                                     value={newNews.title}
                                     onChange={(e) => setNewNews({...newNews, title: e.target.value})}
                                     placeholder="Заголовок новости"
@@ -216,7 +216,7 @@ function AdminContent() {
           
                             <div className="text-lg text-gray-600 mb-3">
                                 <textarea
-                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-100 transition resize-none"
+                                    className="w-full p-3 rounded-lg h-128 outline-none focus:bg-gray-50 transition resize-none"
                                     value={newNews.text}
                                     onChange={(e) => setNewNews({...newNews, text: e.target.value})}
                                     placeholder="Текст новости"
@@ -249,8 +249,8 @@ function AdminContent() {
                                 />
                             </label>
                         ) : (
-                            <label htmlFor="image" className="lg:w-[600px] lg:h-[600px] flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium hover:bg-gray-100 transition">
-                                <span className="text-green font-semibold">Выберите фото</span>
+                            <label htmlFor="image" className="lg:w-[600px] lg:h-[600px] flex justify-center items-center rounded-lg p-5 cursor-pointer font-medium  transition border-2 border-dashed hover:bg-gray-50 border-gray-300">
+                                <span className="text-gray-300 font-semibold text-center">Выберите фото<br />(600x600)</span>
                             </label>
                         )}
 
@@ -267,7 +267,7 @@ function AdminContent() {
                             <div className="mb-3">
                                 <input
                                     type="text"
-                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-100 transition"
+                                    className="w-full p-3 rounded-lg text-green font-bold text-xl lg:text-3xl outline-none focus:bg-gray-50 transition"
                                     value={newBreed.name}
                                     onChange={(e) => setNewBreed({...newBreed, name: e.target.value})}
                                     placeholder="Название породы"
@@ -287,7 +287,7 @@ function AdminContent() {
                                             От <input 
                                                     type="text" 
                                                     name="age[]" 
-                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-50 transition text-center"
                                                     value={newBreed.age[0]}
                                                     onChange={(e) => setNewBreed({...newBreed, age: [e.target.value, newBreed.age[1]]})}
                                                     required
@@ -295,7 +295,7 @@ function AdminContent() {
                                             до <input
                                                     type="text" 
                                                     name="age[]" 
-                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-50 transition text-center"
                                                     value={newBreed.age[1]}
                                                     onChange={(e) => setNewBreed({...newBreed, age: [newBreed.age[0], e.target.value]})}
                                                     required
@@ -313,7 +313,7 @@ function AdminContent() {
                                     <div className="font-semibold">
                                         <div className="text-gray-500">Шерсть</div>
                                         <div>
-                                            <select name="wool" className="outline-none border-b-2 focus:bg-gray-100 transition" value={newBreed.wool} onChange={(e) => setNewBreed({...newBreed, wool: e.target.value})}>
+                                            <select name="wool" className="outline-none border-b-2 focus:bg-gray-50 transition" value={newBreed.wool} onChange={(e) => setNewBreed({...newBreed, wool: e.target.value})}>
                                                 <option value="Не линяет">Не линяет</option>
                                                 <option value="Мало линяет">Мало линяет</option>
                                                 <option value="Линяет">Линяет</option>
@@ -334,7 +334,7 @@ function AdminContent() {
                                             От <input 
                                                     type="text" 
                                                     name="height[]" 
-                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-50 transition text-center"
                                                     value={newBreed.height[0]}
                                                     onChange={(e) => setNewBreed({...newBreed, height: [e.target.value, newBreed.height[1]]})}
                                                     required
@@ -342,7 +342,7 @@ function AdminContent() {
                                             до <input 
                                                     type="text" 
                                                     name="height[]" 
-                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-50 transition text-center"
                                                     value={newBreed.height[1]}
                                                     onChange={(e) => setNewBreed({...newBreed, height: [newBreed.height[0], e.target.value]})}
                                                     required
@@ -363,7 +363,7 @@ function AdminContent() {
                                             От <input 
                                                     type="text" 
                                                     name="weight[]"
-                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-50 transition text-center"
                                                     value={newBreed.weight[0]}
                                                     onChange={(e) => setNewBreed({...newBreed, weight: [e.target.value, newBreed.weight[1]]})}
                                                     required
@@ -371,7 +371,7 @@ function AdminContent() {
                                             до <input 
                                                     type="text" 
                                                     name="weight[]" 
-                                                    className="w-8 outline-none border-b-2 focus:bg-gray-100 transition text-center"
+                                                    className="w-8 outline-none border-b-2 focus:bg-gray-50 transition text-center"
                                                     value={newBreed.weight[1]}
                                                     onChange={(e) => setNewBreed({...newBreed, weight: [newBreed.weight[0], e.target.value]})}
                                                     required
@@ -384,7 +384,7 @@ function AdminContent() {
       
                             <div className="text-lg text-gray-600 my-3">
                                 <textarea
-                                    className="w-full p-3 rounded-lg h-64 outline-none focus:bg-gray-100 transition resize-none"
+                                    className="w-full p-3 rounded-lg h-64 outline-none focus:bg-gray-50 transition resize-none"
                                     value={newBreed.text}
                                     onChange={(e) => setNewBreed({...newBreed, text: e.target.value})}
                                     placeholder="Описание породы"
