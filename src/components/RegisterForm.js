@@ -77,14 +77,14 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                 <div className="flex flex-col items-center gap-6">
                     <FiMail className="text-4xl" />
                     <h2 className="text-2xl font-bold">Введите код подтверждения</h2>
-                    <div className="w-100 text-center">Мы отправили одноразовый код подтверждения на указанный адрес электронной почты, пожалуйста, введите его ниже</div>
+                    <div className="w-100 text-center">Мы отправили одноразовый код подтверждения на указанный адрес электронной почты <span className="font-semibold">({email})</span>, пожалуйста, введите его ниже</div>
 
                     <input
                         type="text" 
                         placeholder="Код подтверждения" 
                         value={code} 
                         onChange={(e) => setCode(e.target.value)}
-                        className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                        className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green text-center"
                         required
                     />
 
