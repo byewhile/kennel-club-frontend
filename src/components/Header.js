@@ -43,7 +43,7 @@ export default function Header() {
         },
         {
             title: "Форум",
-            link: "/forum",
+            link: `/${authenticated ? "forum" : "auth"}`,
             icon: <MdForum />,
         },
         {
