@@ -36,7 +36,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form className="min-w-sm lg:min-w-md mx-auto mt-16 p-8 text-green rounded-lg shadow-lg" onSubmit={handleSubmit}>
+        <form className="min-w-xs lg:min-w-md mx-auto mt-32 lg:mt-16 p-4 lg:p-8 text-green rounded-lg shadow-lg" onSubmit={handleSubmit}>
             <div className="flex flex-col items-center gap-6">
                 <FaPaw className="text-4xl" />
                 <h2 className="text-2xl font-bold">Вход</h2>

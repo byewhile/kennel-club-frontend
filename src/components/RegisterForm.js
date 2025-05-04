@@ -72,12 +72,12 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
     }
 
     return (
-        <form className="min-w-sm lg:min-w-md mx-auto mt-16 p-8 text-green rounded-lg shadow-lg" onSubmit={sendEmail ? handleEmailFormSubmit : handleSubmit}>
+        <form className="min-w-xs lg:min-w-md mx-auto mt-32 lg:mt-16 p-4 lg:p-8 text-green rounded-lg shadow-lg" onSubmit={sendEmail ? handleEmailFormSubmit : handleSubmit}>
             {sendEmail ? (
-                <div className="flex flex-col items-center gap-6">
+                <div className="flex flex-col items-center text-center gap-6">
                     <FiMail className="text-4xl" />
                     <h2 className="text-2xl font-bold">Введите код подтверждения</h2>
-                    <div className="w-100 text-center">Мы отправили одноразовый код подтверждения на указанный адрес электронной почты <span className="font-semibold">({email})</span>, пожалуйста, введите его ниже</div>
+                    <div className="w-auto lg:w-100">Мы отправили одноразовый код подтверждения на указанный адрес электронной почты <span className="font-semibold">({email})</span>, пожалуйста, введите его ниже</div>
 
                     <input
                         type="text" 

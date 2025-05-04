@@ -44,7 +44,7 @@ export default function AuthPage() {
             {loginForm ? <LoginForm /> : <RegisterForm sendEmail={sendEmail} setSendEmail={setSendEmail} />}
 
             {!sendEmail && (
-                <div className="flex flex-col items-center mt-3">
+                <div className="flex flex-col items-center mt-4 mb-12">
                     {loginForm ? "Нет аккаунта?" : "Есть аккаунт?"}
                     <button className="text-green font-bold cursor-pointer" onClick={() => setLoginForm(!loginForm)}>{loginForm ? "Зарегистрироваться" : "Войти"}</button>
                 </div>
