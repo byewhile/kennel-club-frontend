@@ -72,7 +72,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
     }
 
     return (
-        <form className="w-full lg:w-a lg:min-w-md mx-auto mt-32 lg:mt-16 p-4 lg:p-8 text-green rounded-lg shadow-lg" onSubmit={sendEmail ? handleEmailFormSubmit : handleSubmit}>
+        <form className="w-full lg:w-auto lg:min-w-md mx-auto mt-32 lg:mt-16 p-4 lg:p-8 text-green rounded-lg shadow-lg" onSubmit={sendEmail ? handleEmailFormSubmit : handleSubmit}>
             {sendEmail ? (
                 <div className="flex flex-col items-center text-center gap-6">
                     <FiMail className="text-4xl" />
