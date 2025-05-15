@@ -44,7 +44,6 @@ export default function ForumPage() {
         try {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/getTopics.php`);
             const data = res.data;
-
             setTopics(data);
         } catch (err) {
             setError("Не удалось подключиться к серверу!");
