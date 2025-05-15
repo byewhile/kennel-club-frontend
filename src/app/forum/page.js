@@ -83,55 +83,54 @@ export default function ForumPage() {
         <main className="container mx-auto px-6 lg:px-12 py-10">
             <h2 className="text-xl lg:text-3xl text-green font-bold">Форум</h2>
 
-            <div className="my-4 space-y-4">
+            {isLoading ? (
+                <LoadingSpinner />
+            ) : error ? (
+                <ErrorBlock error={error} />
+            ) : topics.length === 0 ? (
+                <NothingBlock />
+            ) : (
+                <div className="my-4 space-y-4">
+                    {isOpenForm ? (
+                        <form onSubmit={handleSubmit} className="rounded-lg shadow-md space-y-2 p-4">
+                            <input 
+                                type="text"
+                                placeholder="Тема обсуждения"
+                                className="text-xl lg:text-3xl w-full p-3 rounded-lg text-green font-bold outline-none focus:bg-gray-50 transition"
+                                value={newTopic.title}
+                                onChange={(e) => setNewTopic({...newTopic, title: e.target.value})}
+                                required
+                            />
 
-                {isOpenForm ? (
-                    <form onSubmit={handleSubmit} className="rounded-lg shadow-md space-y-2 p-4">
-                        <input 
-                            type="text"
-                            placeholder="Тема обсуждения"
-                            className="text-xl lg:text-3xl w-full p-3 rounded-lg text-green font-bold outline-none focus:bg-gray-50 transition"
-                            value={newTopic.title}
-                            onChange={(e) => setNewTopic({...newTopic, title: e.target.value})}
-                            required
-                        />
+                            <textarea 
+                                className="text-xl w-full p-3 rounded-lg h-32 outline-none focus:bg-gray-50 transition resize-none"
+                                placeholder="Текст обсуждения"
+                                value={newTopic.text}
+                                onChange={(e) => setNewTopic({...newTopic, text: e.target.value})}
+                                required
+                            />
 
-                        <textarea 
-                            className="text-xl w-full p-3 rounded-lg h-32 outline-none focus:bg-gray-50 transition resize-none"
-                            placeholder="Текст обсуждения"
-                            value={newTopic.text}
-                            onChange={(e) => setNewTopic({...newTopic, text: e.target.value})}
-                            required
-                        />
-
-                        <div className="flex justify-end">
-                            <button type="submit" className="bg-white text-green hover:bg-green hover:text-white border-green border-2 font-semibold cursor-pointer py-2 px-4 rounded-lg transition">
-                                Создать обсуждение
-                            </button>
+                            <div className="flex justify-end">
+                                <button type="submit" className="bg-white text-green hover:bg-green hover:text-white border-green border-2 font-semibold cursor-pointer py-2 px-4 rounded-lg transition">
+                                    Создать обсуждение
+                                </button>
+                            </div>
+                        </form>
+                    ) : authenticated ? (
+                        <button onClick={() => setIsOpenForm(!isOpenForm)} className="w-full bg-white text-green hover:bg-green hover:text-white border-green border-2 border-dashed font-semibold cursor-pointer p-5 rounded-lg transition">
+                            Создать обсуждение
+                        </button>
+                    ) : (
+                        <div className="text-lg text-center border-green border-2 border-dashed p-5">
+                            <Link href="/auth" className="text-green">Войдите/зарегистрируйтесь</Link> для возможности создавать новые обсуждения
                         </div>
-                    </form>
-                ) : authenticated ? (
-                    <button onClick={() => setIsOpenForm(!isOpenForm)} className="w-full bg-white text-green hover:bg-green hover:text-white border-green border-2 border-dashed font-semibold cursor-pointer p-5 rounded-lg transition">Создать обсуждение</button>
-                ) : (
-                    <div className="text-lg text-center border-green border-2 border-dashed p-5">
-                        <Link href="/auth" className="text-green">Войдите/зарегистрируйтесь</Link> для возможности создавать новые обсуждения
-                    </div>
-                )}
+                    )}
 
-                {isLoading ? (
-                    <LoadingSpinner />
-                ) : error ? (
-                    <ErrorBlock error={error} />
-                ) : topics.length === 0 ? (
-                    <NothingBlock />
-                ) : (
-                    <>
                     {topics.map((topic) => (
                         <TopicBlock key={topic.id} topic={topic} user_id={userId} isAdmin={isAdmin} topics={topics} setTopics={setTopics} />
                     ))}
-                    </>
-                )}
-            </div>
+                </div>
+            )}
         </main>
     )
 }
