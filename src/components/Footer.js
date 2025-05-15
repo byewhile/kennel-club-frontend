@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
-            <h4 className="text-lime-300 font-bold text-xl mb-4">Клуб собаководства</h4>
+            <h4 className="text-lime-300 font-bold text-xl mb-4"><Link href="/">Клуб собаководства</Link></h4>
             <p className="mb-4">Мы объединяем любителей собак для общения, обучения и совместных мероприятий с питомцами</p>
           </div>
 
