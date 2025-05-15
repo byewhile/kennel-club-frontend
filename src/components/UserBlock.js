@@ -25,18 +25,18 @@ export default function UserBlock({ user, handleUserAction }) {
             </div>
                                 
             <div className="flex lg:justify-end w-full lg:w-32">
-                <div className="flex gap-2 mt-3 font-medium">
-                    <Link href={`/profile/${user.id}`} className="bg-green text-white p-2 rounded cursor-pointer transition" title="Перейти в профиль">
+                <div className="flex mt-3 font-medium">
+                    <Link href={`/profile/${user.id}`} className="hover:text-green focus:text-green text-gray-300 p-2 rounded cursor-pointer transition" title="Перейти в профиль">
                         <FaUser />
                     </Link>
 
                     {user.role !== "admin" && (
                         <>
-                            <button onClick={() => handleUserAction(user.id, "make_admin")} className="bg-yellow-400 text-white p-2 rounded cursor-pointer transition" title="Сделать администратором">
+                            <button onClick={() => handleUserAction(user.id, "make_admin")} className="hover:text-yellow-400 focus:text-yellow-400 text-gray-300 p-2 rounded cursor-pointer transition" title="Сделать администратором">
                                 <FaCrown />
                             </button>
 
-                            <button onClick={() => handleUserAction(user.id, "delete")} className="bg-red-500 text-white p-2 rounded cursor-pointer transition" title="Удалить пользователя">
+                            <button onClick={() => handleUserAction(user.id, "delete")} className="hover:text-red-500 focus:text-red-500 text-gray-300 p-2 rounded cursor-pointer transition" title="Удалить пользователя">
                                 <FaTrash />
                             </button>
                         </>

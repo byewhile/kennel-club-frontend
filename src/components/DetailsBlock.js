@@ -6,9 +6,7 @@ import NothingBlock from "./NothingBlock";
 
 export default function DetailsBlock({ details, about }) {
     if (!details) {
-        return (
-            <NothingBlock />
-        );
+        return <NothingBlock />;
     }
 
     return (

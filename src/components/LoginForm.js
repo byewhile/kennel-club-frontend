@@ -43,7 +43,7 @@ export default function LoginForm() {
     
                 <input 
                     type="email" 
-                    placeholder="Email" 
+                    placeholder="Email"
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"

@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
-import { FaArrowLeft } from 'react-icons/fa';
+import { useRouter, useParams } from "next/navigation";
+import { FaArrowLeft } from "react-icons/fa";
 import DetailsBlock from "@/components/DetailsBlock";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorBlock from "@/components/ErrorBlock";
@@ -18,7 +17,7 @@ export default function OneNewsPage() {
     const { id } = useParams();
 
     const handleBack = () => {
-        router.back()
+        router.back();
     }
 
     useEffect(() => {

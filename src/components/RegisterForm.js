@@ -103,7 +103,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                     <div className="flex flex-col lg:flex-row w-full gap-6">
                         <input 
                             type="text" 
-                            placeholder="Имя" 
+                            placeholder="Имя"
                             value={firstName} 
                             onChange={(e) => setFirstName(e.target.value)}
                             className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
@@ -122,7 +122,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
 
                     <input 
                         type="email" 
-                        placeholder="Email" 
+                        placeholder="Email"
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"

@@ -18,7 +18,7 @@ export default function OneNewsPage() {
     const { slug } = useParams();
 
     const handleBack = () => {
-        router.back()
+        router.back();
     }
 
     useEffect(() => {
