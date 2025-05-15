@@ -5,7 +5,7 @@ import RegisterForm from "@/components/RegisterForm";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import LoadingSpinner from "@/components/LoadingSpinner"
+import LoadingSpinner from "@/components/LoadingSpinner";
  
 export default function AuthPage() {
     const [loginForm, setLoginForm] = useState(true);
