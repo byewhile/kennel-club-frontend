@@ -162,7 +162,7 @@ export default function TopicPage() {
                         </form>
                     ) : (
                         <div className="text-lg text-center border-green border-2 border-dashed p-5">
-                            <Link href="/auth" className="text-green">Зарегистрируйтесь</Link> для возможности отправить сообщение
+                            <Link href="/auth" className="text-green">Войдите/зарегистрируйтесь</Link> для возможности отправить сообщение
                         </div>
                     )}
                 </div>

@@ -114,7 +114,7 @@ export default function ForumPage() {
                     <button onClick={() => setIsOpenForm(!isOpenForm)} className="w-full bg-white text-green hover:bg-green hover:text-white border-green border-2 border-dashed font-semibold cursor-pointer p-5 rounded-lg transition">Создать обсуждение</button>
                 ) : (
                     <div className="text-lg text-center border-green border-2 border-dashed p-5">
-                        <Link href="/auth" className="text-green">Зарегистрируйтесь</Link> для возможности создавать новые обсуждения
+                        <Link href="/auth" className="text-green">Войдите/зарегистрируйтесь</Link> для возможности создавать новые обсуждения
                     </div>
                 )}
 
