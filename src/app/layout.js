@@ -6,7 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 export const metadata = {
   title: "Клуб собаководства",
   description: "Клуб собаководства",
-};
+}
 
 export default function RootLayout({ children }) {
   return (

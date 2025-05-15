@@ -1,3 +1,8 @@
+export const metadata = {
+    title: "О нас | Клуб собаководства",
+    description: "О нас | Клуб собаководства",
+}
+
 export default function AboutPage() {
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
