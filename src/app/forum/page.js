@@ -87,8 +87,6 @@ export default function ForumPage() {
                 <LoadingSpinner />
             ) : error ? (
                 <ErrorBlock error={error} />
-            ) : topics.length === 0 ? (
-                <NothingBlock />
             ) : (
                 <div className="my-4 space-y-4">
                     {isOpenForm ? (
@@ -126,9 +124,15 @@ export default function ForumPage() {
                         </div>
                     )}
 
-                    {topics.map((topic) => (
-                        <TopicBlock key={topic.id} topic={topic} user_id={userId} isAdmin={isAdmin} topics={topics} setTopics={setTopics} />
-                    ))}
+                    {topics.length === 0 ? (
+                        <NothingBlock />
+                    ) : (
+                        <>
+                            {topics.map((topic) => (
+                                <TopicBlock key={topic.id} topic={topic} user_id={userId} isAdmin={isAdmin} topics={topics} setTopics={setTopics} />
+                            ))}
+                        </>
+                    )}
                 </div>
             )}
         </main>
