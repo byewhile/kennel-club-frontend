@@ -47,7 +47,7 @@ export default function HomePage() {
 
             <div>
               <Image 
-                src="/banner-image.jpg" 
+                src="/main-image.jpg" 
                 alt="Счастливая собака" 
                 width={600}
                 height={400}
