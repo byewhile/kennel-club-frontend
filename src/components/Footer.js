@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaVk, FaTelegram, FaYoutube, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -9,17 +9,6 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <h4 className="text-lime-300 font-bold text-xl mb-4">Клуб собаководства</h4>
             <p className="mb-4">Мы объединяем любителей собак для общения, обучения и совместных мероприятий с питомцами</p>
-            <ul className="flex gap-4 text-white">
-              <li>
-                <Link href="#"><FaVk className="text-xl" /></Link>
-              </li>
-              <li>
-                <Link href="#"><FaTelegram className="text-xl" /></Link>
-              </li>
-              <li>
-                <Link href="#"><FaYoutube className="text-xl" /></Link>
-              </li>
-            </ul>
           </div>
 
           <nav className="lg:col-span-1">
