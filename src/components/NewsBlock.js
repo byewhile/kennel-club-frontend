@@ -20,7 +20,7 @@ export default function NewsBlock({ newsInfo }) {
 
             <div className="p-6">
                 <div className="flex items-end justify-between gap-3 mb-3">
-                    <h3 className="text-green font-bold text-xl">{newsInfo.title}</h3>
+                    <h3 className="text-green font-bold text-lg xl:text-xl">{newsInfo.title}</h3>
                     <span className="text-gray-400 font-medium">{newsInfo.date.split("-").reverse().join(".")}</span>
                 </div>
                 <p>{description}</p>
