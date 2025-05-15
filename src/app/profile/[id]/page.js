@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaCrown, FaDoorOpen } from "react-icons/fa6";
 
 export default function ProfilePage() {
     const [isLoading, setIsLoading] = useState(true);
@@ -170,15 +170,15 @@ export default function ProfilePage() {
                 </div>
 
                 {isOwnProfile && (
-                    <div>
+                    <div className="space-y-2 space-x-2">
                         {isAdmin && (
-                            <Link href="/admin" className="inline-block mr-2 py-2 px-4 rounded-2xl cursor-pointer border-2 border-green text-green hover:bg-green hover:text-white transition" >
-                                Админ-панель
+                            <Link href="/admin" title="Админ-панель" className="inline-block py-2 px-4 rounded-2xl cursor-pointer border-2 border-green text-green hover:bg-green hover:text-white transition">
+                                <FaCrown className="inline" />
                             </Link>
                         )}
                         
-                        <button className="py-2 px-4 rounded-2xl cursor-pointer border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition" onClick={logout}>
-                            Выйти
+                        <button title="Выйти из профиля" className="py-2 px-4 rounded-2xl cursor-pointer border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition" onClick={logout}>
+                            <FaDoorOpen className="inline" /> 
                         </button>
                     </div>
                 )}
