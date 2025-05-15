@@ -1,6 +1,8 @@
 "use client"
 
+import ErrorBlock from "@/components/ErrorBlock";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import NothingBlock from "@/components/NothingBlock";
 import TopicBlock from "@/components/TopicBlock";
 import axios from "axios";
 import Link from "next/link";
@@ -12,6 +14,7 @@ export default function ForumPage() {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isOpenForm, setIsOpenForm] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [topics, setTopics] = useState([]);
     const [newTopic, setNewTopic] = useState({
         title: "",
@@ -31,8 +34,9 @@ export default function ForumPage() {
             setIsOpenForm(false);
             setNewTopic({title: "", text: ""});
             getTopics();
-        } catch (err) { 
-            console.log(err);
+        } catch (err) {
+            setIsLoading(false);
+            setError("Не удалось подключиться к серверу!");
         }
     }
 
@@ -42,9 +46,10 @@ export default function ForumPage() {
             const data = res.data;
 
             setTopics(data);
-            setIsLoading(false);
         } catch (err) {
-            console.log(err);
+            setError("Не удалось подключиться к серверу!");
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -67,17 +72,12 @@ export default function ForumPage() {
                 setIsAdmin(isAdmin);
                 getTopics();
             } catch (err) {
-                console.log(err);
+                setIsLoading(false);
+                setError("Не удалось подключиться к серверу!");
             }
         }
         checkAuth();
     }, []);
-
-    if (isLoading) {
-        return (
-            <LoadingSpinner />
-        )
-    }
     
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
@@ -118,9 +118,19 @@ export default function ForumPage() {
                     </div>
                 )}
 
-                {topics.map((topic) => (
-                    <TopicBlock key={topic.id} topic={topic} user_id={userId} isAdmin={isAdmin} topics={topics} setTopics={setTopics} />
-                ))}
+                {isLoading ? (
+                    <LoadingSpinner />
+                ) : error ? (
+                    <ErrorBlock error={error} />
+                ) : topics.length === 0 ? (
+                    <NothingBlock />
+                ) : (
+                    <>
+                    {topics.map((topic) => (
+                        <TopicBlock key={topic.id} topic={topic} user_id={userId} isAdmin={isAdmin} topics={topics} setTopics={setTopics} />
+                    ))}
+                    </>
+                )}
             </div>
         </main>
     )
