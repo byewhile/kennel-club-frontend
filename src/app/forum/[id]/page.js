@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
-import { FaTrash  } from "react-icons/fa6";
+import { FaTrash, FaUser } from "react-icons/fa6";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorBlock from "@/components/ErrorBlock";
 import Link from "next/link";
@@ -120,8 +120,8 @@ export default function TopicPage() {
             ) : (
                 <div className="space-y-2 mt-4 gap-5">
                     <div className="p-4 space-y-2">
-                        <div className="flex justify-between text-gray-400 font-medium">
-                            <Link className="hover:text-black transition" href={`/profile/${topic.user_id}`}>{topic.first_name} {topic.last_name}</Link>
+                        <div className="flex flex-wrap justify-between text-gray-400 font-medium">
+                            <Link className="hover:text-black transition" href={`/profile/${topic.user_id}`}><FaUser className="inline mb-2" /> {topic.first_name} {topic.last_name}</Link>
 
                             <div>
                                 <span>{topic.date.split("-").reverse().join(".")}</span>

@@ -1,4 +1,4 @@
-import { FaTrash  } from "react-icons/fa6";
+import { FaTrash, FaUser } from "react-icons/fa6";
 import Link from "next/link";
 import axios from "axios";
 
@@ -17,8 +17,8 @@ export default function MessageBlock({ message, user_id, isAdmin, messages, setM
 
     return (
         <div className="rounded-lg shadow-md space-y-2 p-4">
-            <div className="flex justify-between items-center text-gray-400 font-medium">
-                <Link className="hover:text-black focus:text-black transition" href={`/profile/${message.user_id}`}>{message.first_name} {message.last_name}</Link>
+            <div className="flex flex-wrap justify-between items-center text-gray-400 font-medium">
+                <Link className="hover:text-black focus:text-black transition" href={`/profile/${message.user_id}`}><FaUser className="inline mb-2" /> {message.first_name} {message.last_name}</Link>
 
                 <div>
                     <span>{message.date.split("-").reverse().join(".")}</span>

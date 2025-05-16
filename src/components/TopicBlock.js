@@ -1,4 +1,4 @@
-import { FaTrash  } from "react-icons/fa6";
+import { FaTrash, FaUser } from "react-icons/fa6";
 import Link from "next/link";
 import axios from "axios";
 
@@ -17,8 +17,8 @@ export default function TopicBlock({ topic, user_id, isAdmin, topics, setTopics 
 
     return (
         <div className="rounded-lg shadow-md space-y-2 p-4">
-            <div className="flex justify-between text-gray-400 font-medium">
-                <Link className="hover:text-black transition" href={`/profile/${topic.user_id}`}>{topic.first_name} {topic.last_name}</Link>
+            <div className="flex flex-wrap justify-between text-gray-400 font-medium">
+                <Link className="hover:text-black transition" href={`/profile/${topic.user_id}`}><FaUser className="inline mb-2" /> {topic.first_name} {topic.last_name}</Link>
 
                 <div>
                     <span>{topic.date.split("-").reverse().join(".")}</span>
