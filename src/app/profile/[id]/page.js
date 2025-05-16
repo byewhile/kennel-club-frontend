@@ -139,12 +139,7 @@ export default function ProfilePage() {
                     withCredentials: true
                 });
                 const data = res.data;
-                
-                if (!data.authenticated) {
-                    router.push("/auth");
-                } else {
-                    getUserData(data.user_id);
-                }
+                getUserData(data.user_id);
             } catch (err) {
                 console.log(err);
             }
