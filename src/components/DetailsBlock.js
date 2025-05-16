@@ -23,7 +23,7 @@ export default function DetailsBlock({ details, about }) {
             </div>
         
             <div className="lg:w-1/2">
-                <div className="flex items-end justify-between mb-3">
+                <div className="flex flex-wrap items-end justify-between mb-3">
                     <h2 className="text-green font-bold text-xl lg:text-3xl">{details.title}</h2>
                     {about == "news" && (
                         <span className="text-gray-400 font-medium">{details.date.split("-").reverse().join(".")}</span>
