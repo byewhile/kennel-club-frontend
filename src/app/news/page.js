@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { FaNewspaper } from "react-icons/fa";
 import axios from "axios";
 import NewsBlock from "@/components/NewsBlock";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -47,7 +48,7 @@ function NewsContent() {
 
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
-            <h2 className="text-xl lg:text-3xl text-green font-bold mb-3">Новости клуба</h2>
+            <h2 className="flex gap-2 items-center text-xl lg:text-2xl text-green font-bold mb-3"><FaNewspaper /> Новости клуба</h2>
             {isLoading ? (
                 <LoadingSpinner />
             ) : error ? (

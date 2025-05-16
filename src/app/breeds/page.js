@@ -6,7 +6,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import NothingBlock from "@/components/NothingBlock";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaDog, FaSearch } from "react-icons/fa";
 
 export default function BreedsPage() {
     const [breeds, setBreeds] = useState([]);
@@ -37,7 +37,7 @@ export default function BreedsPage() {
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
             <div className="lg:flex justify-between text-green">
-                <h2 className="text-xl lg:text-3xl font-bold">Породы собак нашего клуба</h2>
+                <h2 className="flex gap-2 items-center text-xl lg:text-2xl font-bold"><FaDog /> Породы собак нашего клуба</h2>
 
                 <div className="flex items-center p-2 border border-green rounded-lg gap-2 my-2 lg:my-0">
                     <FaSearch />

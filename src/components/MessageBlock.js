@@ -18,7 +18,7 @@ export default function MessageBlock({ message, user_id, isAdmin, messages, setM
     return (
         <div className="rounded-lg shadow-md space-y-2 p-4">
             <div className="flex flex-wrap justify-between items-center text-gray-400 font-medium">
-                <Link className="hover:text-black focus:text-black transition" href={`/profile/${message.user_id}`}><FaUser className="inline mb-2" /> {message.first_name} {message.last_name}</Link>
+                <Link className="hover:text-green focus:text-green transition" href={`/profile/${message.user_id}`}><FaUser className="inline mb-2" /> {message.first_name} {message.last_name}</Link>
 
                 <div>
                     <span>{message.date.split("-").reverse().join(".")}</span>

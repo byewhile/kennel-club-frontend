@@ -76,7 +76,7 @@ export default function Header() {
 
                         <nav className="hidden lg:flex items-center gap-5">
                             {pages.map((page, index) => (
-                                <Link href={page.link} key={index} className="flex gap-2 items-center font-medium">
+                                <Link href={page.link} key={index} className="flex gap-2 items-center font-medium hover:scale-105 focus:scale-105">
                                     {page.icon} <span>{page.title}</span>
                                 </Link>
                             ))}

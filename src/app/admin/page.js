@@ -1,7 +1,7 @@
 "use client"
 
 import { Suspense, useEffect, useState } from "react";
-import { FaDog, FaWeightHanging  } from "react-icons/fa6";
+import { FaDog, FaWeightHanging, FaCrown } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { MdHeight } from "react-icons/md";
 import { GiComb } from "react-icons/gi";
@@ -159,7 +159,7 @@ function AdminContent() {
 
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
-            <h2 className="text-xl lg:text-3xl text-green font-bold mb-3">Админ-панель</h2>
+            <h2 className="flex gap-2 items-center text-xl lg:text-2xl text-green font-bold mb-3"><FaCrown /> Админ-панель</h2>
             
             <div className="flex flex-col items-start lg:flex-row gap-3 mb-6">
                 <button className={`cursor-pointer text-green ${activeTab == "news" ? "font-bold" : "font-semibold"}`} onClick={() => setActiveTab("news")}>

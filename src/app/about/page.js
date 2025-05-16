@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { FaInfoCircle} from "react-icons/fa";
 
 export const metadata = {
     title: "О нас | Клуб собаководства",
@@ -8,7 +9,7 @@ export const metadata = {
 export default function AboutPage() {
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
-            <h2 className="text-xl lg:text-3xl text-green font-bold mb-5">О клубе</h2>
+            <h2 className="flex gap-2 items-center text-xl lg:text-2xl text-green font-bold mb-5"><FaInfoCircle /> О клубе</h2>
             <p className="text-xl text-gray-600">Сегодня клуб объединяет более 500 членов и остается центром собаководства в регионе, воспитывая ответственных владельцев и помогая собакам обрести любящие семьи.<br /><em>"От маленькой инициативы – к большому делу!"</em></p>
 
             <div className="space-y-4 my-10">

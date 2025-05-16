@@ -121,7 +121,7 @@ export default function TopicPage() {
                 <div className="space-y-2 mt-4 gap-5">
                     <div className="p-4 space-y-2">
                         <div className="flex flex-wrap justify-between text-gray-400 font-medium">
-                            <Link className="hover:text-black transition" href={`/profile/${topic.user_id}`}><FaUser className="inline mb-2" /> {topic.first_name} {topic.last_name}</Link>
+                            <Link className="hover:text-green focus:text-green transition" href={`/profile/${topic.user_id}`}><FaUser className="inline mb-2" /> {topic.first_name} {topic.last_name}</Link>
 
                             <div>
                                 <span>{topic.date.split("-").reverse().join(".")}</span>

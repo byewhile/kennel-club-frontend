@@ -7,6 +7,7 @@ import TopicBlock from "@/components/TopicBlock";
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react"
+import { MdForum } from "react-icons/md";
 
 export default function ForumPage() {
     const [userId, setUserId] = useState(null);
@@ -80,7 +81,7 @@ export default function ForumPage() {
     
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
-            <h2 className="text-xl lg:text-3xl text-green font-bold">Форум</h2>
+            <h2 className="flex gap-2 items-center text-xl lg:text-2xl text-green font-bold"><MdForum /> Форум</h2>
 
             {isLoading ? (
                 <LoadingSpinner />

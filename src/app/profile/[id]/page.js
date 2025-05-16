@@ -159,10 +159,10 @@ export default function ProfilePage() {
     }
 
     return (
-        <main className="container mx-auto px-12 pt-12">
+        <main className="container mx-auto px-6 lg:px-12 py-10">
             <div className="md:flex justify-between text-green font-bold">
                 <div className="flex flex-col mb-5">
-                    <div className="flex gap-2 text-xl xl:text-3xl"> 
+                    <div className="flex gap-2 text-xl xl:text-2xl"> 
                         <FaUser /> <span>{userData.first_name} {userData.last_name}</span>
                     </div>
 
