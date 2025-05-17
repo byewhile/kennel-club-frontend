@@ -42,7 +42,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                 setError(data.message);
             }
         } catch (err) {
-            setError(err);
+            setError("Не удалось подключиться к серверу!");
         }
         setCaptcha("");
     }
@@ -66,7 +66,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                 setError(data.message);
             }
         } catch (err) {
-            setError(err);
+            setError("Не удалось подключиться к серверу!");
         }
         setCode("");    
     }
@@ -82,9 +82,11 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                     <input
                         type="text" 
                         placeholder="Код подтверждения" 
-                        value={code} 
+                        value={code}
+                        minLength={6}
+                        maxLength={6}
                         onChange={(e) => setCode(e.target.value)}
-                        className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green text-center"
+                        className={`w-full font-medium px-4 py-2 border ${error ? "border-red-500" : "border-green"} rounded-lg outline-none placeholder-green text-center`}
                         required
                     />
 
@@ -106,7 +108,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                             placeholder="Имя"
                             value={firstName} 
                             onChange={(e) => setFirstName(e.target.value)}
-                            className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                            className={`font-medium px-4 py-2 border ${error == "Заполните все поля!" ? "border-red-500" : "border-green"} rounded-lg outline-none placeholder-green`}
                             required
                         />
                 
@@ -115,7 +117,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                             placeholder="Фамилия" 
                             value={lastName} 
                             onChange={(e) => setLastName(e.target.value)} 
-                            className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                            className={`font-medium px-4 py-2 border ${error == "Заполните все поля!" ? "border-red-500" : "border-green"} rounded-lg outline-none placeholder-green`}
                             required
                         />
                     </div>
@@ -125,14 +127,14 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                         placeholder="Email"
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                        className={`w-full font-medium px-4 py-2 border ${(error == "Некорректный email!" || error == "Email уже используется!" || error == "Заполните все поля!") ? "border-red-500" : "border-green"} rounded-lg outline-none placeholder-green`}
                         required
                     />
 
-                    <div className="flex items-center w-full font-medium px-4 py-2 border border-green rounded-lg">
+                    <div className={`flex items-center w-full font-medium px-4 py-2 border ${error == "Заполните все поля!" ? "border-red-500" : "border-green"} rounded-lg`}>
                         <input 
                             type={showPassword ? "text" : "password"}
-                            placeholder="Пароль" 
+                            placeholder="Пароль"
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full outline-none placeholder-green"
@@ -152,9 +154,11 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                         <input 
                             type="text" 
                             placeholder="Код с картинки"
-                            value={captcha} 
+                            value={captcha}
+                            minLength={6}
+                            maxLength={6}
                             onChange={(e) => setCaptcha(e.target.value)}
-                            className="font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                            className={`font-medium px-4 py-2 border ${(error == "Неправильный код с картинки!" || error == "Заполните все поля!") ? "border-red-500" : "border-green"} rounded-lg outline-none placeholder-green`}
                             required
                         />
                 </div>

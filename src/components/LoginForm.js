@@ -31,7 +31,7 @@ export default function LoginForm() {
                 setError(data.message);
             }
         } catch (err) {
-            setError(err);
+            setError("Не удалось подключиться к серверу!");
         }
     }
 
@@ -46,14 +46,14 @@ export default function LoginForm() {
                     placeholder="Email"
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full font-medium px-4 py-2 border border-green rounded-lg outline-none placeholder-green"
+                    className={`w-full font-medium px-4 py-2 border ${error ? "border-red-500" : "border-green"} rounded-lg outline-none placeholder-green`}
                     required
                 />
       
-                <div className="flex items-center w-full font-medium px-4 py-2 border border-green rounded-lg">
+                <div className={`flex items-center w-full font-medium px-4 py-2 border ${error ? "border-red-500" : "border-green"} rounded-lg`}>
                     <input 
                         type={showPassword ? "text" : "password"}
-                        placeholder="Пароль" 
+                        placeholder="Пароль"
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full outline-none placeholder-green"
