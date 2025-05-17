@@ -102,7 +102,7 @@ export default function ProfilePage() {
                 },
                 withCredentials: true
             });
-            setNewDog({ name: "", gender: "", birthday: "", breed: "", image: null});
+            setNewDog({ name: "", gender: "", birthday: "", breed_id: "", image: null});
             getUserDogs();
         } catch (err) {
             console.log(err);
@@ -241,7 +241,7 @@ export default function ProfilePage() {
 
                         <div>
                             <div className="text-gray-300">Порода:</div>
-                            <select name="breed" className="text-green border-b-1 outline-none font-semibold focus:bg-gray-50 transition" value={newDog.breed} onChange={(e) => setNewDog({...newDog, breed_id: e.target.value})} required>
+                            <select name="breed" className="text-green border-b-1 outline-none font-semibold focus:bg-gray-50 transition" value={newDog.breed_id} onChange={(e) => setNewDog({...newDog, breed_id: e.target.value})} required>
                                 <option value="">---</option>
                                 {breeds.map((breed) => (
                                     <option key={breed.id} value={breed.id}>{breed.title}</option>
