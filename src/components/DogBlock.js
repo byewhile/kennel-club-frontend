@@ -25,6 +25,7 @@ export default function DogBlock({ dog, isOwnProfile, deleteDog }) {
                 width={300}
                 height={300}
                 className="rounded-lg"
+                loading="lazy"
             />
 
             <div>
