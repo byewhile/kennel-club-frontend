@@ -9,6 +9,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorBlock from "@/components/ErrorBlock";
 import Link from "next/link";
 import MessageBlock from "@/components/MessageBlock";
+import ReactHtmlParser from "html-react-parser";
 
 export default function TopicPage() {
     const [userId, setUserId] = useState(null);
@@ -136,7 +137,7 @@ export default function TopicPage() {
 
                         <div className="flex flex-col gap-2">
                             <span className="text-2xl font-semibold">{topic.title}</span>
-                            <span className="text-lg">{topic.topic_text}</span>
+                            <span className="text-lg">{ReactHtmlParser(topic.topic_text)}</span>
                         </div>
                     </div>
 
@@ -150,6 +151,7 @@ export default function TopicPage() {
                                 className="text-lg w-full p-3 rounded-lg h-32 outline-none focus:bg-gray-50 transition resize-none"
                                 placeholder="Ваше сообщение..."
                                 value={newMessage}
+                                maxLength={300}
                                 onChange={(e) => setNewMessage(e.target.value)}
                                 required
                             />

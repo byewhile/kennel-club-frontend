@@ -7,6 +7,11 @@ import TopicBlock from "@/components/TopicBlock";
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react"
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import Placeholder from "@tiptap/extension-placeholder";
+import CharacterCount from "@tiptap/extension-character-count";
 import { MdForum } from "react-icons/md";
 
 export default function ForumPage() {
@@ -21,23 +26,57 @@ export default function ForumPage() {
         title: "",
         text: ""
     });
+    const limit = 300;
+
+    const editor = useEditor({
+        extensions: [
+            StarterKit, 
+            Underline,
+            Placeholder.configure({
+                placeholder: "Текст обсуждения",
+                emptyEditorClass: "is-editor-empty"
+            }),
+            CharacterCount.configure({
+                limit,
+            }),
+        ],
+        content: newTopic.text,
+        immediatelyRender: false,
+        onUpdate: ({ editor }) => {
+            const html = editor.getHTML();
+            setNewTopic({...newTopic, text: html});
+        },
+        editorProps: {
+            attributes: {
+                class: "h-full outline-none p-0 border-none overflow-y-auto",
+            },
+        },
+    });
+
+    const isContentEmpty = () => {
+        if (!editor) return true;
+        return editor.isEmpty || !editor.getText().trim() || !newTopic.title.trim();
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("title", newTopic.title);
-        formData.append("text", newTopic.text);
+        const isEmpty = isContentEmpty();
 
-        try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/addTopic.php`, formData, {
-                withCredentials: true
-            });
-            setIsOpenForm(false);
-            setNewTopic({title: "", text: ""});
-            getTopics();
-        } catch (err) {
-            setIsLoading(false);
-            setError("Не удалось подключиться к серверу!");
+        if (!isEmpty) {
+            const formData = new FormData();
+            formData.append("title", newTopic.title);
+            formData.append("text", newTopic.text);
+
+            try {
+                await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/addTopic.php`, formData, {
+                    withCredentials: true
+                });
+                setIsOpenForm(false);
+                setNewTopic({title: "", text: ""});
+                getTopics();
+            } catch (err) {
+                setError("Не удалось подключиться к серверу!");
+            }
         }
     }
 
@@ -96,17 +135,46 @@ export default function ForumPage() {
                                 placeholder="Тема обсуждения"
                                 className="text-xl lg:text-3xl w-full p-3 rounded-lg text-green font-bold outline-none focus:bg-gray-50 transition"
                                 value={newTopic.title}
+                                maxLength={64}
                                 onChange={(e) => setNewTopic({...newTopic, title: e.target.value})}
                                 required
                             />
 
-                            <textarea 
-                                className="text-xl w-full p-3 rounded-lg h-32 outline-none focus:bg-gray-50 transition resize-none"
-                                placeholder="Текст обсуждения"
-                                value={newTopic.text}
-                                onChange={(e) => setNewTopic({...newTopic, text: e.target.value})}
-                                required
-                            />
+                            <div className="text-xl p-3 rounded-lg h-48 outline-none overflow-hidden">
+                                <EditorContent
+                                    editor={editor}
+                                    data-placeholder="Текст обсуждения"
+                                    maxLength={20}
+                                    className="h-full"
+                                />
+                            </div>
+
+                            <div className="flex gap-2 px-3">
+                                <button
+                                    type="button"
+                                    onClick={() => editor?.chain().focus().toggleBold().run()}
+                                    className={`p-2 rounded-lg cursor-pointer ${editor?.isActive("bold") ? "bg-gray-50" : ""}`}
+                                    title="Жирный"
+                                >
+                                    <strong>Ж</strong>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => editor?.chain().focus().toggleItalic().run()}
+                                    className={`p-2 rounded-lg cursor-pointer ${editor?.isActive("italic") ? "bg-gray-50" : ""}`}
+                                    title="Курсив"
+                                >
+                                    <em>К</em>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => editor?.chain().focus().toggleUnderline().run()}
+                                    className={`p-2 rounded-lg cursor-pointer ${editor?.isActive("underline") ? "bg-gray-50" : ""}`}
+                                    title="Подчеркивание"
+                                >
+                                    <u>П</u>
+                                </button>
+                            </div>
 
                             <div className="flex justify-end">
                                 <button type="submit" className="bg-white text-green hover:bg-green hover:text-white border-green border-2 font-semibold cursor-pointer py-2 px-4 rounded-lg transition">
