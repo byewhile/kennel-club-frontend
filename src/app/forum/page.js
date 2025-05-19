@@ -48,7 +48,7 @@ export default function ForumPage() {
         },
         editorProps: {
             attributes: {
-                class: "h-full outline-none p-0 border-none overflow-y-auto",
+                class: "h-full outline-none p-3 border-none overflow-y-auto focus:bg-gray-50 transition",
             },
         },
     });
@@ -140,7 +140,7 @@ export default function ForumPage() {
                                 required
                             />
 
-                            <div className="text-xl p-3 rounded-lg h-48 outline-none overflow-hidden">
+                            <div className="text-xl rounded-lg h-48 outline-none overflow-hidden">
                                 <EditorContent
                                     editor={editor}
                                     data-placeholder="Текст обсуждения"
@@ -153,7 +153,7 @@ export default function ForumPage() {
                                 <button
                                     type="button"
                                     onClick={() => editor?.chain().focus().toggleBold().run()}
-                                    className={`p-2 rounded-lg cursor-pointer ${editor?.isActive("bold") ? "bg-gray-50" : ""}`}
+                                    className={`p-2 w-10 rounded-xl cursor-pointer border ${editor?.isActive("bold") ? "border-black" : "border-white"}`}
                                     title="Жирный"
                                 >
                                     <strong>Ж</strong>
@@ -161,7 +161,7 @@ export default function ForumPage() {
                                 <button
                                     type="button"
                                     onClick={() => editor?.chain().focus().toggleItalic().run()}
-                                    className={`p-2 rounded-lg cursor-pointer ${editor?.isActive("italic") ? "bg-gray-50" : ""}`}
+                                    className={`p-2 w-10 rounded-xl cursor-pointer border ${editor?.isActive("italic") ? "border-black" : "border-white"}`}
                                     title="Курсив"
                                 >
                                     <em>К</em>
@@ -169,7 +169,7 @@ export default function ForumPage() {
                                 <button
                                     type="button"
                                     onClick={() => editor?.chain().focus().toggleUnderline().run()}
-                                    className={`p-2 rounded-lg cursor-pointer ${editor?.isActive("underline") ? "bg-gray-50" : ""}`}
+                                    className={`p-2 w-10 rounded-xl cursor-pointer border ${editor?.isActive("underline") ? "border-black" : "border-white"}`}
                                     title="Подчеркивание"
                                 >
                                     <u>П</u>
