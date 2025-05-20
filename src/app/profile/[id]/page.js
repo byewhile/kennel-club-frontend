@@ -1,5 +1,6 @@
 "use client"
 
+import ConfirmDeleteDogBlock from "@/components/ConfirmDeleteDogBlock";
 import DogBlock from "@/components/DogBlock";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
@@ -12,6 +13,8 @@ import { FaUser, FaCrown, FaDoorOpen } from "react-icons/fa6";
 export default function ProfilePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isOwnProfile, setIsOwnProfile] = useState(false);
+    const [isShowConfirmBlock, setIsShowConfirmBlock] = useState(false);
+    const [dogToDelete, setDogToDelete] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [userData, setUserData] = useState(null);
     const [userDogs, setUserDogs] = useState([]);
@@ -116,6 +119,7 @@ export default function ProfilePage() {
         try {
             await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/deleteDog.php`, formData);
             getUserDogs();
+            setIsShowConfirmBlock(false);
         } catch (err) {
             console.log(err);
         }
@@ -155,6 +159,13 @@ export default function ProfilePage() {
 
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
+            {isShowConfirmBlock && (
+                <ConfirmDeleteDogBlock
+                    action={() => deleteDog(dogToDelete)}
+                    setIsShowConfirmBlock={setIsShowConfirmBlock}
+                />
+            )}
+
             <div className="md:flex justify-between text-green font-bold">
                 <div className="flex flex-col mb-5">
                     <div className="flex gap-2 text-xl xl:text-2xl"> 
@@ -258,7 +269,7 @@ export default function ProfilePage() {
                 {userDogs && (
                     <>
                     {userDogs.map((dog) => (
-                        <DogBlock key={dog.id} dog={dog} isOwnProfile={isOwnProfile} deleteDog={deleteDog} />
+                        <DogBlock key={dog.id} dog={dog} isOwnProfile={isOwnProfile} setDogToDelete={setDogToDelete} setIsShowConfirmBlock={setIsShowConfirmBlock} />
                     ))}
                     </>
                 )}

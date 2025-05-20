@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function DogBlock({ dog, isOwnProfile, deleteDog }) {
+export default function DogBlock({ dog, isOwnProfile, setDogToDelete, setIsShowConfirmBlock }) {
     const dogAge = calculateAge(dog.birthday);
 
     function calculateAge(birthday) {
@@ -52,7 +52,7 @@ export default function DogBlock({ dog, isOwnProfile, deleteDog }) {
             </div>
 
             {isOwnProfile && (
-                <button className="w-48 bg-red-500 text-white font-semibold cursor-pointer py-2 rounded-lg mt-4" onClick={() => deleteDog(dog.id)}>
+                <button className="w-48 bg-red-500 text-white font-semibold cursor-pointer py-2 rounded-lg mt-4" onClick={() => {setDogToDelete(dog.id);setIsShowConfirmBlock(true)}}>
                     Удалить друга
                 </button>
             )}
