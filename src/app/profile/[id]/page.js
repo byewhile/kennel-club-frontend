@@ -211,7 +211,7 @@ export default function ProfilePage() {
 
                         <input
                             type="file"
-                            accept="image/*"
+                            accept="image/jpeg, image/png"
                             onChange={(e) => setNewDog({...newDog, image: e.target.files[0]})}
                             className="hidden"
                             id="image"
