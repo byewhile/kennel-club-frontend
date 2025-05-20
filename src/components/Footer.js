@@ -31,7 +31,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <FaMapMarkerAlt className="text-lime-300 mt-1 mr-2" />
-                <span>г. Москва, ул. Собачья, 15</span>
+                <Link href="https://yandex.ru/maps/213/moscow/?indoorLevel=1&ll=37.531355%2C55.790574&mode=whatshere&whatshere%5Bpoint%5D=37.531081%2C55.790742&whatshere%5Bzoom%5D=18.35&z=17.35" target="blank" className="hover:underline">г. Москва, ул. Собачья, 15</Link>
               </li>
               <li className="flex items-start">
                 <FaPhone className="text-lime-300 mt-1 mr-2" />
