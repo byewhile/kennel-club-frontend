@@ -95,6 +95,8 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
                         value="Отправить"
                         className="w-full bg-lim text-white bg-green font-bold py-2 px-4 rounded-lg transition duration-200 cursor-pointer"
                     />
+
+                    <div className="w-auto lg:w-100 text-sm">Нажимая кнопку «Отправить», вы подтверждаете своё согласие на получение рекламных рассылок</div>
                     {error && <ErrorBlock error={error} />}
                 </div>
             ) : (
