@@ -1,6 +1,6 @@
 "use client"
 
-import ConfirmDeleteDogBlock from "@/components/ConfirmDeleteDogBlock";
+import ConfirmBlock from "@/components/ConfirmBlock";
 import DogBlock from "@/components/DogBlock";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
@@ -160,7 +160,9 @@ export default function ProfilePage() {
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
             {isShowConfirmBlock && (
-                <ConfirmDeleteDogBlock
+                <ConfirmBlock
+                    actionType="delete"
+                    entityType="dogs"
                     action={() => deleteDog(dogToDelete)}
                     setIsShowConfirmBlock={setIsShowConfirmBlock}
                 />

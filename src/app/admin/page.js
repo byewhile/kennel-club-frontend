@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import { MdHeight } from "react-icons/md";
 import { GiComb } from "react-icons/gi";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import ConfirmBlock from "@/components/ConfirmBlock";
 import axios from "axios";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -14,6 +15,9 @@ import UserBlock from "@/components/UserBlock";
 
 function AdminContent() {
     const [isLoading, setIsLoading] = useState(true);
+    const [isShowConfirmBlock, setIsShowConfirmBlock] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [action, setAction] = useState(null);
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -148,6 +152,7 @@ function AdminContent() {
         try {
             await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/manageUser.php`, formData);
             fetchUsers();
+            setIsShowConfirmBlock(false);
         } catch (err) {
             console.log(err);
         }
@@ -159,6 +164,15 @@ function AdminContent() {
 
     return (
         <main className="container mx-auto px-6 lg:px-12 py-10">
+            {isShowConfirmBlock && (
+                <ConfirmBlock
+                    actionType={action}
+                    entityType="users"
+                    action={() => handleUserAction(userId, action)}
+                    setIsShowConfirmBlock={setIsShowConfirmBlock}
+                />
+            )}
+
             <h2 className="flex gap-2 items-center text-xl lg:text-2xl text-green font-bold mb-3"><FaCrown /> Админ-панель</h2>
             
             <div className="flex flex-col items-start lg:flex-row gap-3 mb-6">
@@ -422,7 +436,7 @@ function AdminContent() {
                     
                     <div className="space-y-3 my-3">
                         {filteredUsers.map((user) => (
-                            <UserBlock key={user.id} user={user} handleUserAction={handleUserAction} />
+                            <UserBlock key={user.id} user={user} setUserId={setUserId} setAction={setAction} setIsShowConfirmBlock={setIsShowConfirmBlock} />
                         ))}
                     </div>
                 </div>
