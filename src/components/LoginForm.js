@@ -25,7 +25,7 @@ export default function LoginForm() {
             });
             const data = res.data;
             
-            if (data.authenticated) {
+            if (data.isLogin) {
                 window.location.reload();
             } else {
                 setError(data.message);

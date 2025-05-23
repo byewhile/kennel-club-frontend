@@ -53,30 +53,14 @@ function AdminContent() {
             setUsers(data);
         } catch (err) {
             console.log(err);
+        } finally {
+            setIsLoading(false);
         }
     }
 
     useEffect(() => {
         searchTerm ? setFilteredUsers(users.filter(user => user.id.startsWith(searchTerm))) : setFilteredUsers(users);
     }, [users, searchTerm]);
-
-    const checkAdmin = async (user_id) => {
-        try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkAdmin.php?id=${user_id}`, {
-                withCredentials: true
-            });
-            const isAdmin = res.data;
-
-            if (!isAdmin) {
-                router.push("/");
-            } else {
-                fetchUsers();
-                setIsLoading(false);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -86,11 +70,17 @@ function AdminContent() {
                 });
                 const data = res.data;
                 
-                if (!data.authenticated) {
+                if (!data.isLogin) {
                     router.push("/");
-                } else {
-                    checkAdmin(data.user_id);
+                    return;
                 }
+
+                if (!data.isAdmin) {
+                    router.push("/");
+                    return;
+                }
+
+                fetchUsers();
             } catch (err) {
                 console.log(err);
             }

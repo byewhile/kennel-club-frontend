@@ -13,7 +13,7 @@ import ReactHtmlParser from "html-react-parser";
 
 export default function TopicPage() {
     const [userId, setUserId] = useState(null);
-    const [authenticated, setAuthenticated] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [topic, setTopic] = useState(null);
     const [messages, setMessages] = useState(null);
@@ -84,29 +84,23 @@ export default function TopicPage() {
         }
     }
 
-    const checkAuth = async () => {
-        try {
-            let res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
-                withCredentials: true
-            });
-            const data = res.data;
-
-            setUserId(data.user_id);
-            setAuthenticated(data.authenticated);
-            
-            res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkAdmin.php?id=${data.user_id}`, {
-                withCredentials: true
-            });
-            const isAdmin = res.data;
-
-            setIsAdmin(isAdmin);
-            getTopic();
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+                    withCredentials: true
+                });
+                const data = res.data;
+
+                setUserId(data.user_id);
+                setIsLogin(data.isLogin);
+                setIsAdmin(data.isAdmin);
+                getTopic();
+            } catch (err) {
+                setIsLoading(false);
+                setError("Не удалось подключиться к серверу!");
+            }
+        }
         checkAuth();
     }, []);
 
@@ -145,7 +139,7 @@ export default function TopicPage() {
                         <MessageBlock key={message.id} message={message} user_id={userId} isAdmin={isAdmin} messages={messages} setMessages={setMessages} />
                     ))}
 
-                    {authenticated ? (
+                    {isLogin ? (
                         <form onSubmit={handleSubmit} className="rounded-lg shadow-md space-y-2 p-4">
                             <textarea
                                 className="text-lg w-full p-3 rounded-lg h-32 outline-none focus:bg-gray-50 transition resize-none"

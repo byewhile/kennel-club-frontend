@@ -41,23 +41,11 @@ export default function ProfilePage() {
 
             if (data == null) {
                 router.push("/profile");
-            } else {
-                setUserData(data[0]);
-                checkAdmin(user_id);
-                getUserDogs();
+                return;
             }
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
-    const checkAdmin = async (user_id) => {
-        try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkAdmin.php?id=${user_id}`, {
-                withCredentials: true
-            });
-            const isAdmin = res.data;
-            setIsAdmin(isAdmin);
+            setUserData(data[0]);
+            getUserDogs();
         } catch (err) {
             console.log(err);
         }
@@ -143,6 +131,8 @@ export default function ProfilePage() {
                     withCredentials: true
                 });
                 const data = res.data;
+
+                setIsAdmin(data.isAdmin);
                 getUserData(data.user_id);
             } catch (err) {
                 console.log(err);

@@ -16,7 +16,7 @@ import { MdForum } from "react-icons/md";
 
 export default function ForumPage() {
     const [userId, setUserId] = useState(null);
-    const [authenticated, setAuthenticated] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isOpenForm, setIsOpenForm] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -95,20 +95,14 @@ export default function ForumPage() {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                let res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkSession.php`, {
                     withCredentials: true
                 });
                 const data = res.data;
 
                 setUserId(data.user_id);
-                setAuthenticated(data.authenticated);
-            
-                res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/checkAdmin.php?id=${data.user_id}`, {
-                    withCredentials: true
-                });
-                const isAdmin = res.data;
-
-                setIsAdmin(isAdmin);
+                setIsLogin(data.isLogin);
+                setIsAdmin(data.isAdmin);
                 getTopics();
             } catch (err) {
                 setIsLoading(false);
@@ -182,7 +176,7 @@ export default function ForumPage() {
                                 </button>
                             </div>
                         </form>
-                    ) : authenticated ? (
+                    ) : isLogin ? (
                         <button onClick={() => setIsOpenForm(!isOpenForm)} className="w-full bg-white text-green hover:bg-green hover:text-white border-green border-2 border-dashed font-semibold cursor-pointer p-5 rounded-lg transition">
                             Создать обсуждение
                         </button>

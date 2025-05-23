@@ -8,7 +8,7 @@ import axios from "axios";
 
 export default function Header() {
     const [userId, setUserId] = useState(null);
-    const [authenticated, setAuthenticated] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
     useEffect(() => {
@@ -19,10 +19,8 @@ export default function Header() {
                 });
                 const data = res.data;
 
-                if (data.authenticated) {
-                    setUserId(data.user_id);
-                    setAuthenticated(true);
-                }
+                setIsLogin(data.isLogin);
+                setUserId(data.user_id);
             } catch (err) {
                 console.log(err);
             }
@@ -53,7 +51,7 @@ export default function Header() {
         },
         {
             title: "Профиль",
-            link: `/${authenticated ? "profile/" + userId : "auth"}`,
+            link: `/${isLogin ? "profile/" + userId : "auth"}`,
             icon: <FaUser />,
         },
     ];

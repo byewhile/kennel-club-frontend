@@ -36,7 +36,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
             });
             const data = res.data;
 
-            if (data.authenticated) {
+            if (data.isLogin) {
                 setSendEmail(true);
             } else {
                 setError(data.message);
@@ -60,7 +60,7 @@ export default function RegisterForm({ sendEmail, setSendEmail }) {
             });
             const data = res.data;
 
-            if (data.authenticated) {
+            if (data.isLogin) {
                 window.location.reload();
             } else {
                 setError(data.message);

@@ -16,7 +16,7 @@ export default function ProfilePage() {
                 });
                 const data = res.data;
 
-                if (!data.authenticated) {
+                if (!data.isLogin) {
                     router.push("/auth");
                 } else {
                     router.push(`/profile/${data.user_id}`);
