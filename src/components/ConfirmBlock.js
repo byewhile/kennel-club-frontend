@@ -26,7 +26,7 @@ export default function ConfirmBlock({ actionType, entityType, action, setIsShow
         <div className="fixed inset-0 z-10 backdrop-blur">
             <div className="min-h-full flex items-center justify-center p-4">
                 <div className={`bg-white border-2 ${config.border_color} p-5 rounded-xl font-semibold`}>
-                    <div className="text-lg lg:text-xl text-center">Вы точно хотите <span className={`${config.text_color}`}>{config.doText}</span> этого <span className="text-green">{who}</span></div>
+                    <div className="text-lg lg:text-xl text-center">Вы точно хотите <span className={`${config.text_color}`}>{config.doText}</span> этого <span className="text-green">{who}?</span></div>
                     <div className="flex justify-evenly mt-5">
                         <button className={`cursor-pointer ${config.text_color}`} onClick={action}>{config.doText.charAt(0).toUpperCase() + config.doText.slice(1)}</button>
                         <button className="cursor-pointer text-green" onClick={() => setIsShowConfirmBlock(false)}>Отмена</button>
