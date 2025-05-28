@@ -118,7 +118,7 @@ export default function ProfilePage() {
             await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/logout.php`, {
                 withCredentials: true
             });
-            window.location.reload();
+            window.location.href = "/";
         } catch (err) {
             console.log(err);
         }
